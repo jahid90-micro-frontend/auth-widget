@@ -1,11 +1,15 @@
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Segment } from 'semantic-ui-react';
 import { useAppContext } from '../context/AppContextProvider';
 
 const Home = () => {
     const { token } = useAppContext();
     if (token) {
-        return <Redirect to='/information' />
+        return (<Segment secondary className='home-container page-container'>
+            <div className='centered columnar h500'>
+                <p>This app manages user auth.</p>
+            </div>
+        </Segment>);
     }
 
     return (

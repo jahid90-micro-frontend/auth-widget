@@ -1,6 +1,9 @@
 version: '3'
 
 networks:
+  traefik:
+    name: traefik
+    driver: bridge
   frontend:
     name: frontend
     driver: bridge
@@ -13,9 +16,19 @@ services:
     image: auth:dev
     container_name: auth
     restart: unless-stopped
-    ports:
-      - 3000:80
+    networks:
+      - traefik
+      - frontend
+    expose:
+      - 80
     environment:
       - PORT=80
+      - AUTH_SERVICE_URI=http://localhost:5000
     volumes:
       - .:/app
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=traefik
+      - traefik.http.routers.auth.entrypoints=websecure
+      - traefik.http.routers.auth.rule=Host(`auth.jahiduls.dev`)
+      - traefik.http.routers.auth.tls=true

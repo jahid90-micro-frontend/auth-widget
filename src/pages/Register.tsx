@@ -3,11 +3,11 @@ import { useHistory } from 'react-router-dom';
 import { Button, Form, Icon, Label, Message, Segment } from 'semantic-ui-react';
 
 import { useDispatchContext } from '../context/AppContextProvider';
-import { Action } from '../context/app-reducer';
-import { ErrorResponse } from '../clients/auth-service';
+import { ApiError } from '../clients/auth';
+import { Actions } from '../modules/events';
 
 const Register = () => {
-    const [error, setError] = useState({} as ErrorResponse);
+    const [error, setError] = useState({} as ApiError);
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -18,9 +18,9 @@ const Register = () => {
     const handleSubmit = async (e: FormEvent<HTMLElement>) => {
         try {
             e.preventDefault();
-            setError({} as ErrorResponse);
+            setError({} as ApiError);
 
-            await dispatch({ type: Action.REGISTER_USER, data: { username, email, password, confirmPassword } });
+            await dispatch({ type: Actions.Reducer.REGISTER_USER, data: { username, email, password } });
 
             setUsername('');
             setEmail('');
@@ -38,7 +38,7 @@ const Register = () => {
         <Segment secondary className='form-container page-container w600'>
             <Form className='login-form form centered columnar' onSubmit={handleSubmit}>
                 <h1>Register</h1>
-                <Icon name='user' className='profile-image' size='massive'/>
+                <Icon name='user' className='profile-image' size='massive' />
                 <Form.Field className='form-field-container'>
                     <Form.Input
                         placeholder='Username'
@@ -89,10 +89,7 @@ const Register = () => {
                     <Message negative>
                         <Message.Header>{error.message}</Message.Header>
                         <Message.List>
-                            {error.data?.username && <Message.Item>{error.data.username}</Message.Item>}
-                            {error.data?.email && <Message.Item>{error.data.email}</Message.Item>}
-                            {error.data?.password && <Message.Item>{error.data.password}</Message.Item>}
-                            {error.data?.confirmPassword && <Message.Item>{error.data.confirmPassword}</Message.Item>}
+                            {error.data?.map(message => <Message.Item>{message}</Message.Item>)}
                         </Message.List>
                     </Message>
                 )}

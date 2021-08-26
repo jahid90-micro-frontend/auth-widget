@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Container, Dimmer, Loader } from 'semantic-ui-react';
-
-import { Action } from '../context/app-reducer';
 import { useDispatchContext } from '../context/AppContextProvider';
+import { Actions } from '../modules/events';
 import Routes from './Routes';
 
 function AppContainer() {
@@ -11,7 +10,7 @@ function AppContainer() {
     useEffect(() => {
         (async () => {
             try {
-                await dispatch({ type: Action.LOAD_APP });
+                dispatch({ type: Actions.Reducer.LOAD_APP });
                 setLoading(false);
             } catch (e) {
                 // Ignore it. Failed to load previous session. User will have to login again.

@@ -1,10 +1,15 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button, Form, Icon, Label, Message, Segment } from 'semantic-ui-react';
 
 import { useDispatchContext } from '../context/AppContextProvider';
-import { Action } from '../context/app-reducer';
-import { ErrorResponse } from '../clients/auth-service';
+import { ApiError } from '../clients/auth';
+import EventBus from '../modules/event-bus';
+import { Actions, Events } from '../modules/events';
+
+const tag = (message: string) => {
+    return `:login:component: ${message}`;
+}
 
 interface ILoginProps {
     location?: {
@@ -15,34 +20,49 @@ interface ILoginProps {
 }
 
 const Login = (props: ILoginProps) => {
-    const [error, setError] = useState({} as ErrorResponse);
+    const [error, setError] = useState({} as ApiError);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatchContext();
     const history = useHistory();
 
     const handleSubmit = async (e: FormEvent<HTMLElement>) => {
-        try {
-            e.preventDefault();
-            setError({} as ErrorResponse);
+        e.preventDefault();
+        setError({} as ApiError);
 
-            await dispatch({ type: Action.LOG_USER_IN, data: { username, password } });
-
-            setUsername('');
-            setPassword('');
-
-            history.push(props?.location?.state?.from || '/');
-        } catch (e) {
-            console.error(e);
-            setError(e.response?.data?.error);
-        }
+        await dispatch({ type: Actions.Reducer.LOG_USER_IN, data: { username, password } });
     };
+
+    const onLoginFailure = (data: ApiError) => {
+        console.debug(tag(`login failed - ${JSON.stringify(data)}`));
+        setError(data);
+    };
+
+    const onLoginSuccess = () => {
+        console.debug(tag('login succeeded'));
+
+        setUsername('');
+        setPassword('');
+
+        history.push(props?.location?.state?.from || '/');
+    };
+
+    useEffect(() => {
+
+        EventBus.on(Events.Bus.LOGIN_SUCCEEDED, onLoginSuccess);
+        EventBus.on(Events.Bus.LOGIN_FAILED, onLoginFailure);
+
+        return () => {
+            EventBus.off(Events.Bus.LOGIN_SUCCEEDED, onLoginSuccess);
+            EventBus.off(Events.Bus.LOGIN_FAILED, onLoginFailure);
+        }
+    }, []);
 
     return (
         <Segment secondary className='form-container page-container w600'>
             <Form className='login-form form centered columnar' onSubmit={handleSubmit}>
                 <h1>Login</h1>
-                <Icon name='user' className='profile-image' size='massive'/>
+                <Icon name='user' className='profile-image' size='massive' />
                 <Form.Field className='form-field-container'>
                     <Form.Input
                         placeholder='Username'
@@ -76,8 +96,7 @@ const Login = (props: ILoginProps) => {
                     <Message negative>
                         <Message.Header>{error.message}</Message.Header>
                         <Message.List>
-                            {error.data?.username && <Message.Item>{error.data.username}</Message.Item>}
-                            {error.data?.password && <Message.Item>{error.data.password}</Message.Item>}
+                            {error.data?.map((message, idx) => <Message.Item key={idx}>{message}</Message.Item>)}
                         </Message.List>
                     </Message>
                 )}

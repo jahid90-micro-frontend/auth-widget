@@ -18,3 +18,27 @@ export const hasExpired = (token: string) => {
 export const decode = (token: string): IToken => {
     return decodeToken(token);
 }
+
+export const set = (token: string) => {
+    if (!token) {
+        console.warn('token:set token is undefined');
+        return;
+    }
+
+    localStorage.setItem('token', token);
+}
+
+export const get = () => {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        console.warn('token:get no token was found');
+        return '';
+    }
+
+    return token;
+}
+
+export const clear = () => {
+    localStorage.removeItem('token');
+}

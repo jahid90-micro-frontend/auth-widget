@@ -1,9 +1,9 @@
 import { useHistory } from 'react-router-dom';
 import { Button, Segment } from 'semantic-ui-react';
 
-import { Action } from '../context/app-reducer';
 import { useAppContext, useDispatchContext } from '../context/AppContextProvider';
 import { decode } from '../clients/token';
+import { Actions } from '../modules/events';
 
 const Profile = () => {
     const { token } = useAppContext();
@@ -12,7 +12,7 @@ const Profile = () => {
     const history = useHistory();
 
     const handleClick = async () => {
-        await dispatch({ type: Action.LOG_USER_OUT, data: { token } });
+        await dispatch({ type: Actions.Reducer.LOG_USER_OUT, data: { token } });
 
         history.push('/');
     };
