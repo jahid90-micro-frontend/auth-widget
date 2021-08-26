@@ -1,10 +1,15 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button, Form, Icon, Label, Message, Segment } from 'semantic-ui-react';
 
 import { useDispatchContext } from '../context/AppContextProvider';
 import { ApiError } from '../clients/auth';
-import { Actions } from '../modules/events';
+import { Actions, Events } from '../modules/events';
+import EventBus from '../modules/event-bus';
+
+const tag = (message: string) => {
+    return `:register:component: ${message}`;
+}
 
 const Register = () => {
     const [error, setError] = useState({} as ApiError);
@@ -20,19 +25,45 @@ const Register = () => {
             e.preventDefault();
             setError({} as ApiError);
 
-            await dispatch({ type: Actions.Reducer.REGISTER_USER, data: { username, email, password } });
+            await dispatch({ type: Actions.Reducer.REGISTER_USER, data: { username, email, password, confirmPassword } });
+            // show spinner while we wait; can be reset on success/failure
 
-            setUsername('');
-            setEmail('');
-            setPassword('');
-            setConfirmPassword('');
-
-            history.push('/login');
         } catch (e) {
             console.error(e);
             setError(e.response?.data?.error);
         }
     };
+
+    const onRegistrationSuccess = () => {
+
+        console.debug(tag('successfully registered'));
+
+        setUsername('');
+        setEmail('');
+        setPassword('');
+        setConfirmPassword('');
+
+        // Registration is successful; let's log the user in
+        (async() => {
+            await dispatch({ type: Actions.Reducer.LOG_USER_IN, data: { username, password } });
+        })();
+    }
+
+    const onRegistrationFailure = (data: ApiError) => {
+        console.debug(tag('registration failed'));
+        setError(data);
+    }
+
+    useEffect(() => {
+
+        EventBus.on(Events.Bus.REGISTRATION_SUCCEEDED, onRegistrationSuccess);
+        EventBus.on(Events.Bus.REGISTRATION_FAILED, onRegistrationFailure);
+
+        return () => {
+            EventBus.off(Events.Bus.REGISTRATION_SUCCEEDED, onRegistrationSuccess);
+            EventBus.off(Events.Bus.REGISTRATION_FAILED, onRegistrationFailure);
+        }
+    });
 
     return (
         <Segment secondary className='form-container page-container w600'>

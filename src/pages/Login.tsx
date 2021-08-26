@@ -31,6 +31,7 @@ const Login = (props: ILoginProps) => {
         setError({} as ApiError);
 
         await dispatch({ type: Actions.Reducer.LOG_USER_IN, data: { username, password } });
+        // show spinner while we wait; can be reset on success/failure
     };
 
     const onLoginFailure = (data: ApiError) => {
@@ -56,7 +57,7 @@ const Login = (props: ILoginProps) => {
             EventBus.off(Events.Bus.LOGIN_SUCCEEDED, onLoginSuccess);
             EventBus.off(Events.Bus.LOGIN_FAILED, onLoginFailure);
         }
-    }, []);
+    });
 
     return (
         <Segment secondary className='form-container page-container w600'>

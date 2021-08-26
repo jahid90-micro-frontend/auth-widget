@@ -16,20 +16,6 @@ interface ILoginResponse {
     }
 }
 
-export const register = async (
-    username: string,
-    email: string,
-    password: string,
-    confirmPassword: string
-): Promise<void> => {
-    await auth.post('/register', {
-        username,
-        email,
-        password,
-        confirmPassword,
-    });
-};
-
 export class ApiError extends Error {
 
     message: string;
@@ -63,6 +49,19 @@ const wrapError = (error: any) => {
     return error;
 }
 
+export const register = async (username: string, email: string, password: string): Promise<void> => {
+
+    console.debug(tag('received request to login user: ' + username));
+
+    try {
+
+        await auth.post('/register', { username, email, password });
+
+    } catch (error) {
+        throw wrapError(error);
+    }
+};
+
 export const login = async (username: string, password: string): Promise<string> => {
 
     console.debug(tag('received request to login user: ' + username));
@@ -86,11 +85,13 @@ export const logout = async (token: string): Promise<void> => {
     console.debug(tag('received request to logout user'));
 
     try {
+
         await auth.delete('/logout', {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         });
+
     } catch (error) {
         throw wrapError(error);
     }
