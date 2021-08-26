@@ -1,6 +1,6 @@
 import { register } from "../clients/auth";
 import { IAction } from "../context/app-reducer";
-import EventBus from "../modules/event-bus";
+import { EventBus } from "../modules/event-bus";
 import { Events } from "../modules/events";
 
 const tag = (message: string) => {
@@ -16,6 +16,10 @@ export const handleUserRegistration = (dispatch: React.Dispatch<IAction>, data: 
 
             if (!data || !data.username || !data.email || !data.password || !data.confirmPassword) {
                 console.warn(tag('incomplete data received'));
+                EventBus.emit(Events.Bus.REGISTRATION_FAILED, {
+                    message: 'Registration Failed',
+                    data: ['Please fill in all the fields']
+                });
                 return;
             }
 

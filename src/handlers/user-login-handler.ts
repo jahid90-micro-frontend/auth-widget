@@ -1,7 +1,7 @@
 import { login } from "../clients/auth";
 import { set } from "../clients/token";
 import { IAction } from "../context/app-reducer";
-import EventBus from "../modules/event-bus";
+import { EventBus } from "../modules/event-bus";
 import { Events } from "../modules/events";
 
 const tag = (message: string) => {
@@ -24,10 +24,15 @@ export const handleUserLogin = (dispatch: React.Dispatch<IAction>, payload: (Rec
 
             if (!token) {
                 console.warn(tag('token is undefined!'));
+                EventBus.emit(Events.Bus.LOGIN_FAILED, {
+                    message: 'Login Failed',
+                    data: ['There was some error. Please try again.'],
+                });
                 return;
             }
 
             set(token);
+
             dispatch({ type: Events.Reducer.USER_LOGGED_IN, data: { token } });
             EventBus.emit(Events.Bus.LOGIN_SUCCEEDED);
 

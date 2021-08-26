@@ -1,4 +1,4 @@
-import { hasExpired } from "../clients/token";
+import { get, hasExpired } from "../clients/token";
 import { IAction } from "../context/app-reducer";
 import { Events } from "../modules/events";
 
@@ -10,7 +10,7 @@ export const handleAppLoad = (dispatch: React.Dispatch<IAction>) => {
 
     console.debug(tag('handling app load'));
 
-    const token = localStorage.getItem('token');
+    const token = get();
 
     if (!token) {
         console.debug(tag('no saved session found'));

@@ -1,4 +1,4 @@
-class EventBus {
+class EventBusImpl {
 
     listeners: Record<string, Array<(data: any) => void>>;
 
@@ -26,5 +26,5 @@ class EventBus {
 
 }
 
-// share a single instance of the event bus across the app
-export default new EventBus();
+// share a single instance across the app
+export const EventBus = new EventBusImpl();

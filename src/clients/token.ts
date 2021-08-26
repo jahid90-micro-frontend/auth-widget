@@ -1,9 +1,12 @@
 import decodeToken from 'jwt-decode';
 
+const tag = (message: string) => {
+    return `:token:service: ${message}`;
+}
+
 export interface IToken {
     username: string;
     email: string;
-    roles: Array<string>;
     iat: number;
     exp: number;
 }
@@ -20,8 +23,9 @@ export const decode = (token: string): IToken => {
 }
 
 export const set = (token: string) => {
+
     if (!token) {
-        console.warn('token:set token is undefined');
+        console.warn(tag('token is undefined'));
         return;
     }
 
@@ -32,8 +36,7 @@ export const get = () => {
     const token = localStorage.getItem('token');
 
     if (!token) {
-        console.warn('token:get no token was found');
-        return '';
+        console.warn(tag('no token was found'));
     }
 
     return token;

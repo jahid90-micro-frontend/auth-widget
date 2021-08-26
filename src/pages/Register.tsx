@@ -5,7 +5,7 @@ import { Button, Form, Icon, Label, Message, Segment } from 'semantic-ui-react';
 import { useDispatchContext } from '../context/AppContextProvider';
 import { ApiError } from '../clients/auth';
 import { Actions, Events } from '../modules/events';
-import EventBus from '../modules/event-bus';
+import { EventBus } from '../modules/event-bus';
 
 const tag = (message: string) => {
     return `:register:component: ${message}`;

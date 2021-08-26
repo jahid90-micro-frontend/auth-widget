@@ -1,7 +1,7 @@
 import { logout } from "../clients/auth";
 import { clear } from "../clients/token";
 import { IAction } from "../context/app-reducer"
-import EventBus from "../modules/event-bus";
+import { EventBus } from "../modules/event-bus";
 import { Events } from "../modules/events";
 
 const tag = (message: string) => {
@@ -24,9 +24,8 @@ export const handleUserLogout = (dispatch: React.Dispatch<IAction>, data: (Recor
             await logout(token);
             await clear();
 
-            localStorage.removeItem('token');
-
             dispatch({ type: Events.Reducer.USER_LOGGED_OUT });
+            EventBus.emit(Events.Bus.LOGOUT_SUCCEEDED);
 
         } catch (err) {
             EventBus.emit(Events.Bus.LOGOUT_FAILED, err);
