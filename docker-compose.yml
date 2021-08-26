@@ -1,0 +1,21 @@
+version: '3'
+
+networks:
+  frontend:
+    name: frontend
+    driver: bridge
+
+services:
+  auth:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: auth:dev
+    container_name: auth
+    restart: unless-stopped
+    ports:
+      - 3000:80
+    environment:
+      - PORT=80
+    volumes:
+      - .:/app

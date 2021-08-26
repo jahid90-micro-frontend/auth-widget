@@ -1,0 +1,106 @@
+html, body {
+    background-color: #808080 !important;
+    width: 100%;
+    height: 100%;
+}
+
+.app {
+    font-size: 18px;
+    max-width: 1024px;
+    margin: 20px auto;
+}
+
+.app .centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app .columnar {
+    display: flex;
+    flex-direction: column;
+}
+
+.app .h500 {
+    height: 500px !important;
+}
+
+.app .w600 {
+    width: 600px !important;
+}
+
+.app .floated-right {
+    float: right;
+}
+
+.app .hidden {
+    visibility: hidden;
+}
+
+.app .app-nav {
+    box-shadow: 5px 4px 4px 2px #707070;
+}
+
+.app .page-container {
+    width: 1024px;
+    max-width: 1024px;
+    padding: 10px;
+    box-shadow: 5px 8px 4px 2px #707070;
+}
+
+.app .home-container.page-container {
+    font-size: 20px;
+}
+
+.app .information-cards {
+    justify-content: space-around;
+}
+
+.app .information-cards .information-card {
+    width: 30% !important;
+}
+
+.app .information-cards .dummy {
+    height: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.app .profile-image {
+    margin: 20px 0px 40px 0px;
+}
+
+.app .form-container.page-container {
+    margin: auto;
+    padding: 30px !important;
+}
+
+.app .form {
+    margin: 0px auto;
+    width: 100%;
+    line-height: 30px;
+}
+
+.app .form .form-field-container, .app .form .form-field-container .form-field {
+    max-width: 100% !important;
+    width: 100%;
+}
+
+.app .form .field .input,
+.app .form .button {
+    font-size: 18px !important;
+}
+
+.app .form button.form-field {
+    margin: 20px 0 !important;
+}
+
+.app .form .errors {
+    width: 600px;
+    margin-top: 75px;
+    font-size: 16px;
+}
+
+.app .deposits-container .deposit-header {
+    font-size: 14px;
+}

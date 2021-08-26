@@ -1,0 +1,9 @@
+.github/
+node_modules/
+.dockerignore
+.gitignore
+docker-compose.yml
+Dockerfile
+just.json
+README.md
+renovate.json
