@@ -21,7 +21,7 @@ const Profile = () => {
     const { token, username, email, roles } = useAppContext();
     const history = useHistory();
 
-    const [error, setError] = useState({} as ApiError);
+    const [error, updateError] = useState({} as ApiError);
     const [permissions, setPermissions] = useState([] as IPermission[]);
     const availablePermissions = [
         'users:list',
@@ -40,55 +40,56 @@ const Profile = () => {
 
     }
 
+    const setError = (err: ApiError) => {
+        updateError({
+            ...error,
+            message: err.message,
+            data: error.data ? [...error.data, ...err.data] : [...err.data],
+        });
+    }
+
+    const resetError = () => {
+        updateError({} as ApiError);
+    }
+
     const onLogoutSuccess = () => {
         console.debug(tag('logout succeeded'));
-        setError({} as ApiError);
+        resetError();
 
         history.push('/login');
     }
 
     const onLogoutFailure = (err: ApiError) => {
         console.debug(tag('logout failed'));
-        setError({
-            ...error,
-            message: err.message,
-            data: error.data ? [...error.data, ...err.data] : [...err.data],
-        });
+        setError(err);
+
     }
 
     const onUserDetailsFetchSuccess = () => {
         console.debug(tag('user details fetch succeeded'));
+        resetError();
         // remove loading spinner
-        setError({} as ApiError);
     }
 
     const onUserDetailsFetchFailure = (err: ApiError) => {
         console.debug(tag('user details fetch failed'));
-        setError({
-            ...error,
-            message: err.message,
-            data: error.data ? [...error.data, ...err.data] : [...err.data],
-        });
+        setError(err);
         // remove spinner
     }
 
     const onUserRolesFetchSuccess = () => {
         console.debug(tag('user roles fetch succeeded'));
-        setError({} as ApiError);
+        resetError();
     }
 
     const onUserRolesFetchFailure = (err: ApiError) => {
         console.debug(tag('user roles fetch failed'));
-        setError({
-            ...error,
-            message: err.message,
-            data: error.data ? [...error.data, ...err.data] : [...err.data],
-        });
+        setError(err);
     }
 
     const onUserRoleAddSuccess = () => {
         console.debug(tag('user role add succeeded'));
-        setError({} as ApiError);
+        resetError();
 
         // the role was successfully added; lets update the list of current permissions
         // we could simulate it on the client side to save an api call
@@ -97,16 +98,12 @@ const Profile = () => {
 
     const onUserRoleAddFailure = (err: ApiError) => {
         console.debug(tag('user role add failed'));
-        setError({
-            ...error,
-            message: err.message,
-            data: error.data ? [...error.data, ...err.data] : [...err.data],
-        });
+        setError(err);
     }
 
     const onUserRoleRemoveSuccess = () => {
         console.debug(tag('user role remove succeeded'));
-        setError({} as ApiError);
+        resetError();
 
         // the role was successfully removed; lets update the list of current permissions
         // we could simulate it on the client side to save an api call
@@ -116,11 +113,7 @@ const Profile = () => {
     const onUserRoleRemoveFailure = (err: ApiError) => {
         console.debug(tag('user role remove failed'));
         console.debug(tag(JSON.stringify(err)));
-        setError({
-            ...error,
-            message: err.message,
-            data: error.data ? [...error.data, ...err.data] : [...err.data],
-        });
+        setError(err);
     }
 
     useEffect(() => {
@@ -136,6 +129,8 @@ const Profile = () => {
 
         setPermissions(updatedPermissions);
         console.debug(tag('permissions updated'));
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [roles]);
 
     useEffect(() => {

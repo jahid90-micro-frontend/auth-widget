@@ -29,7 +29,12 @@ const wrapError = (error: any) => {
 
         console.debug(error.response);
 
-        if (error.response.data.error) {
+        if (error.response.status === 401) {
+            // token was invalid; sessio is probably expired
+            // renew token and retry request
+            // for current impl, should we ask user to logout and login again or just trigger a logout?
+            return new ApiError('Session expired', ['please logout and login again']);
+        } else if (error.response.data.error) {
             const { message, data } = error.response.data.error;
             return new ApiError(message, data);
         } else {
