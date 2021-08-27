@@ -4,6 +4,7 @@ export const Events = {
         USER_LOGGED_IN: 'event:user:login',
         USER_LOGGED_OUT: 'event:user:logout',
         USER_REGISTERED: 'event:user:register',
+        USER_DETAILS_FETCHED: 'event:user:details:fetch'
     },
     Bus: {
         LOGIN_FAILED: 'event:login:failed',
@@ -12,6 +13,8 @@ export const Events = {
         LOGOUT_SUCCEEDED: 'event:logout:succeeded',
         REGISTRATION_FAILED: 'event:registration:failed',
         REGISTRATION_SUCCEEDED: 'event:registration:succeeded',
+        USER_DETAILS_FETCH_SUCCEEDED: 'event:user:details:fetch:succeeded',
+        USER_DETAILS_FETCH_FAILED: 'event:user:details:fetch:failed',
     }
 };
 
@@ -21,5 +24,6 @@ export const Actions = {
         LOG_USER_IN: 'action:user:login',
         LOG_USER_OUT: 'action:user:logout',
         REGISTER_USER: 'action:user:register',
+        FETCH_USER_DETAILS: 'action:user:details:fetch',
     }
 };

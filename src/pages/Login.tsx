@@ -30,12 +30,12 @@ const Login = (props: ILoginProps) => {
         e.preventDefault();
         setError({} as ApiError);
 
-        await dispatch({ type: Actions.Reducer.LOG_USER_IN, data: { username, password } });
+        dispatch({ type: Actions.Reducer.LOG_USER_IN, data: { username, password } });
         // show spinner while we wait; can be reset on success/failure
     };
 
     const onLoginFailure = (data: ApiError) => {
-        console.debug(tag(`login failed - ${JSON.stringify(data)}`));
+        console.debug(tag('login failed'));
         setError(data);
     };
 
@@ -57,7 +57,8 @@ const Login = (props: ILoginProps) => {
             EventBus.off(Events.Bus.LOGIN_SUCCEEDED, onLoginSuccess);
             EventBus.off(Events.Bus.LOGIN_FAILED, onLoginFailure);
         }
-    });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <Segment secondary className='form-container page-container w600'>

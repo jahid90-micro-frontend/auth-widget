@@ -110,3 +110,34 @@ export const refresh = async (): Promise<string> => {
         throw wrapError(error);
     }
 };
+
+interface IGetDetailsResponse {
+    data: {
+        username: string,
+        email: string,
+    }
+}
+
+export const getDetails = async (token: string): Promise<Record<string, string>> => {
+
+    console.debug(tag('received request to fetch user details'));
+
+    try {
+
+        const response: IGetDetailsResponse = await auth.get('/users/me', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        const { username, email } = response.data;
+
+        return {
+            username,
+            email,
+        }
+
+    } catch (error) {
+        throw wrapError(error);
+    }
+
+}

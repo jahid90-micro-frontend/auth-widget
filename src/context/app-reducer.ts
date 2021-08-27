@@ -1,6 +1,7 @@
 import { Dispatch } from 'react';
 
 import { handleAppLoad } from '../handlers/app-load-handler';
+import { handleUserDetailsFetch } from '../handlers/user-details-fetch-handler';
 import { handleUserLogin } from '../handlers/user-login-handler';
 import { handleUserLogout } from '../handlers/user-logout-handler';
 import { handleUserRegistration } from '../handlers/user-registration-handler';
@@ -10,28 +11,54 @@ const tag = (message: string) => {
     return `:app:reducer: ${message}`;
 }
 
-export interface IState {
-    token: string;
+export interface IAction {
+    type: string,
+    data?: Record<string, string>,
 }
 
-export interface IAction {
-    type: string;
-    data?: Record<string, string>;
+export interface IState {
+    token: string,
+    username: string,
+    email: string,
+}
+
+export const initialState: IState = {
+    token: '',
+    username: '',
+    email: '',
 }
 
 export const reducer = (state: IState, action: IAction): IState => {
+
+    console.debug(tag(`current state: ${JSON.stringify(state)}`));
+    console.debug(tag(`action: ${JSON.stringify(action)}`));
+
     switch (action.type) {
         case Events.Reducer.APP_LOADED:
-            return {
-                ...state,
-                token: action.data?.token as string,
-            };
+            if (action.data) {
+                return {
+                    ...state,
+                    token: action.data.token,
+                }
+            } else {
+                return {
+                    ...state,
+                }
+            }
 
         case Events.Reducer.USER_LOGGED_IN:
-            return {
-                ...state,
-                token: action.data?.token as string,
-            };
+            if (action.data) {
+                return {
+                    ...state,
+                    token: action.data.token,
+                    username: action.data.username,
+                    email: action.data.email,
+                }
+            } else {
+                return {
+                    ...state,
+                }
+            }
 
         case Events.Reducer.USER_LOGGED_OUT:
             return {
@@ -40,9 +67,30 @@ export const reducer = (state: IState, action: IAction): IState => {
             };
 
         case Events.Reducer.USER_REGISTERED:
-            return {
-                ...state,
-            };
+            if (action.data) {
+                return {
+                    ...state,
+                    username: action.data.username,
+                    email: action.data.email,
+                }
+            } else {
+                return {
+                    ...state,
+                }
+            }
+
+        case Events.Reducer.USER_DETAILS_FETCHED:
+            if (action.data) {
+                return {
+                    ...state,
+                    username: action.data.username,
+                    email: action.data.email,
+                }
+            } else {
+                return {
+                    ...state,
+                }
+            }
 
         default:
             return {
@@ -55,7 +103,6 @@ export const wrapDispatch = (dispatch: Dispatch<IAction>) => {
     return (action: IAction) => {
         console.info(tag(`received ${action.type}`));
 
-        // TODO - consider removing all locals to not need the curly braces hack; just use well-named functions?
         switch (action.type) {
             case Actions.Reducer.LOAD_APP:
                 handleAppLoad(dispatch);
@@ -71,6 +118,10 @@ export const wrapDispatch = (dispatch: Dispatch<IAction>) => {
 
             case Actions.Reducer.REGISTER_USER:
                 handleUserRegistration(dispatch, action.data);
+                break;
+
+            case Actions.Reducer.FETCH_USER_DETAILS:
+                handleUserDetailsFetch(dispatch, action.data);
                 break;
 
             default:

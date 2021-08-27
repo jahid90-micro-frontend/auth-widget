@@ -25,7 +25,7 @@ const Register = () => {
             e.preventDefault();
             setError({} as ApiError);
 
-            await dispatch({ type: Actions.Reducer.REGISTER_USER, data: { username, email, password, confirmPassword } });
+            dispatch({ type: Actions.Reducer.REGISTER_USER, data: { username, email, password, confirmPassword } });
             // show spinner while we wait; can be reset on success/failure
 
         } catch (e) {
@@ -45,7 +45,7 @@ const Register = () => {
 
         // Registration is successful; let's log the user in
         (async() => {
-            await dispatch({ type: Actions.Reducer.LOG_USER_IN, data: { username, password } });
+            dispatch({ type: Actions.Reducer.LOG_USER_IN, data: { username, password } });
         })();
     }
 
@@ -63,7 +63,8 @@ const Register = () => {
             EventBus.off(Events.Bus.REGISTRATION_SUCCEEDED, onRegistrationSuccess);
             EventBus.off(Events.Bus.REGISTRATION_FAILED, onRegistrationFailure);
         }
-    });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <Segment secondary className='form-container page-container w600'>

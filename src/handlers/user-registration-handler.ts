@@ -25,7 +25,6 @@ export const handleUserRegistration = (dispatch: React.Dispatch<IAction>, data: 
 
             const { username, email, password, confirmPassword } = data;
 
-
             if (password !== confirmPassword) {
                 EventBus.emit(Events.Bus.REGISTRATION_FAILED, {
                     message: 'Registration Failed',
@@ -36,7 +35,7 @@ export const handleUserRegistration = (dispatch: React.Dispatch<IAction>, data: 
 
             await register(username, email, password);
 
-            dispatch({ type: Events.Reducer.USER_REGISTERED });
+            dispatch({ type: Events.Reducer.USER_REGISTERED, data: { username, email } });
             EventBus.emit(Events.Bus.REGISTRATION_SUCCEEDED);
 
         } catch (err) {
