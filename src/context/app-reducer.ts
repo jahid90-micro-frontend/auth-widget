@@ -90,7 +90,7 @@ export const reducer = (state: IState, action: IAction): IState => {
         case Events.Reducer.USER_ROLE_REMOVED:
             return {
                 ...state,
-                roles: action.data?.role && state.roles.filter(r => r !== action.data?.role) || [...state.roles]
+                roles: (action.data?.role && state.roles.filter(r => r !== action.data?.role)) || [...state.roles]
             }
 
         default:
