@@ -16,7 +16,7 @@ export const handleUserDetailsFetch = (dispatch: React.Dispatch<IAction>, payloa
 
             if (!payload || !payload.token) {
                 console.warn(tag('token is missing'));
-                EventBus.emit(Events.Bus.USER_DETAILS_FETCH_FAILED, { message: 'Token is missing' });
+                EventBus.emit(Events.Bus.USER_DETAILS_FETCH_FAILED, { message: 'no active session was found', data: [] });
                 return;
             }
 
@@ -26,7 +26,7 @@ export const handleUserDetailsFetch = (dispatch: React.Dispatch<IAction>, payloa
             EventBus.emit(Events.Bus.USER_DETAILS_FETCH_SUCCEEDED);
 
         } catch (err) {
-            EventBus.emit(Events.Bus.USER_DETAILS_FETCH_FAILED, err);
+            EventBus.emit(Events.Bus.USER_DETAILS_FETCH_FAILED, { message: err.message, data: err.data || [] });
         }
     })();
 }

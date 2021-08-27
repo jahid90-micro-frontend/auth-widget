@@ -10,18 +10,12 @@ const auth = axios.create({
     withCredentials: true,
 });
 
-interface ILoginResponse {
-    data: {
-        accessToken: string
-    }
-}
-
 export class ApiError extends Error {
 
     message: string;
     data: string[];
 
-    constructor(message = '', data = []) {
+    constructor(message = '', data: string[] = []) {
         super();
 
         this.message = message;
@@ -35,10 +29,14 @@ const wrapError = (error: any) => {
 
         console.debug(error.response);
 
-        const { message, data } = error.response.data.error;
-        const err = new ApiError(message, data);
-
-        return err;
+        if (error.response.data.error) {
+            const { message, data } = error.response.data.error;
+            return new ApiError(message, data);
+        } else {
+            // if no error object is set in the response; could happed for 404, for e.g.
+            const { status, data } = error.response;
+            return new ApiError(status, [data]);
+        }
 
     } else if (error.request) {
         console.debug(error.request);
@@ -51,11 +49,13 @@ const wrapError = (error: any) => {
 
 export const register = async (username: string, email: string, password: string): Promise<void> => {
 
-    console.debug(tag('received request to login user: ' + username));
+    console.debug(tag(`request: register user - ${username}`));
 
     try {
 
-        await auth.post('/register', { username, email, password });
+        const response = await auth.post('/register', { username, email, password });
+
+        console.debug(tag(`response: ${JSON.stringify(response.data) || {}}`));
 
     } catch (error) {
         throw wrapError(error);
@@ -64,14 +64,16 @@ export const register = async (username: string, email: string, password: string
 
 export const login = async (username: string, password: string): Promise<string> => {
 
-    console.debug(tag('received request to login user: ' + username));
+    console.debug(tag(`request: login user: ${username}`));
 
     try {
 
-        const response: ILoginResponse = await auth.post('/login', {
+        const response = await auth.post('/login', {
             username,
             password,
         });
+
+        console.debug(tag(`response: ${JSON.stringify(response.data) || {}}`));
 
         return response.data.accessToken;
 
@@ -82,28 +84,39 @@ export const login = async (username: string, password: string): Promise<string>
 
 export const logout = async (token: string): Promise<void> => {
 
-    console.debug(tag('received request to logout user'));
+    console.debug(tag('request: logout user'));
 
     try {
 
-        await auth.delete('/logout', {
+        const response = await auth.delete('/logout', {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         });
 
+        console.debug(tag(`response: ${JSON.stringify(response.data) || {}}`));
+
     } catch (error) {
+
+        if (error.response.status === 401) {
+            console.debug(tag('token is expired, going ahead with logout'));
+            return;
+        }
+
         throw wrapError(error);
     }
 };
 
 export const refresh = async (): Promise<string> => {
 
-    console.debug(tag('received request to refresh token'));
+    console.debug(tag('request: refresh token'));
 
     try {
 
-        const response: ILoginResponse = await auth.post('/renew');
+        const response = await auth.post('/renew');
+
+        console.debug(tag(`response: ${JSON.stringify(response.data) || {}}`));
+
         return response.data.accessToken;
 
     } catch (error) {
@@ -111,30 +124,94 @@ export const refresh = async (): Promise<string> => {
     }
 };
 
-interface IGetDetailsResponse {
-    data: {
-        username: string,
-        email: string,
-    }
-}
-
 export const getDetails = async (token: string): Promise<Record<string, string>> => {
 
-    console.debug(tag('received request to fetch user details'));
+    console.debug(tag('request: fetch user details'));
 
     try {
 
-        const response: IGetDetailsResponse = await auth.get('/users/me', {
+        const response = await auth.get('/users/me', {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         });
-        const { username, email } = response.data;
 
+        console.debug(tag(`response: ${JSON.stringify(response.data) || {}}`));
+
+        const { username, email } = response.data;
         return {
             username,
             email,
         }
+
+    } catch (error) {
+        throw wrapError(error);
+    }
+
+}
+
+export const getRoles = async (token: string): Promise<Record<string, string>> => {
+
+    console.debug(tag('request: fetch user roles'));
+
+    try {
+
+        const response = await auth.get('/users/me/roles', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        console.debug(tag(`response: ${JSON.stringify(response.data) || {}}`));
+
+        const { roles } = response.data;
+        return {
+            roles
+        }
+
+    } catch (error) {
+        throw wrapError(error);
+    }
+
+}
+
+export const addRole = async (token: string, role: string): Promise<void> => {
+
+    console.debug(tag('request: add user role'));
+
+    try {
+
+        const response = await auth.post('/users/me/roles', {
+            role
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        console.debug(tag(`response: ${JSON.stringify(response.data) || {}}`));
+
+    } catch (error) {
+        throw wrapError(error);
+    }
+
+}
+
+export const removeRole = async (token: string, role: string): Promise<void> => {
+
+    console.debug(tag('request: remove user role'));
+
+    try {
+
+        const response = await auth.post('/users/me/roles/remove', {
+            role
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        console.debug(tag(`response: ${JSON.stringify(response.data) || {}}`));
 
     } catch (error) {
         throw wrapError(error);

@@ -16,6 +16,10 @@ export const handleUserLogin = (dispatch: React.Dispatch<IAction>, payload: (Rec
         try {
             if (!payload || !payload.username || !payload.password) {
                 console.warn(tag('received incomplete data'));
+                EventBus.emit(Events.Bus.LOGIN_FAILED, {
+                    message: 'Login failed',
+                    data: ['please fill in all the fields']
+                });
                 return;
             }
 
@@ -37,7 +41,7 @@ export const handleUserLogin = (dispatch: React.Dispatch<IAction>, payload: (Rec
             EventBus.emit(Events.Bus.LOGIN_SUCCEEDED);
 
         } catch (err) {
-            EventBus.emit(Events.Bus.LOGIN_FAILED, err);
+            EventBus.emit(Events.Bus.LOGIN_FAILED, { message: err.message, data: err.data || [] });
         }
     })();
 }

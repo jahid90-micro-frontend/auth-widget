@@ -12,13 +12,14 @@ const tag = (message: string) => {
 }
 
 const Register = () => {
+    const dispatch = useDispatchContext();
+    const history = useHistory();
+
     const [error, setError] = useState({} as ApiError);
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const dispatch = useDispatchContext();
-    const history = useHistory();
 
     const handleSubmit = async (e: FormEvent<HTMLElement>) => {
         try {
@@ -78,6 +79,7 @@ const Register = () => {
                         onChange={(e) => setUsername(e.target.value)}
                         autoFocus
                         className='form-field'
+                        autoComplete='username'
                     />
                 </Form.Field>
                 <Form.Field className='form-field-container'>
@@ -95,6 +97,7 @@ const Register = () => {
                         type='password'
                         onChange={(e) => setPassword(e.target.value)}
                         className='form-field'
+                        autoComplete='new-password'
                     />
                 </Form.Field>
                 <Form.Field className='form-field-container'>
@@ -104,6 +107,7 @@ const Register = () => {
                         type='password'
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         className='form-field'
+                        autoComplete='new-password'
                     />
                 </Form.Field>
                 <Button type='submit' className='form-field' color='blue' >

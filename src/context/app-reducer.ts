@@ -5,6 +5,9 @@ import { handleUserDetailsFetch } from '../handlers/user-details-fetch-handler';
 import { handleUserLogin } from '../handlers/user-login-handler';
 import { handleUserLogout } from '../handlers/user-logout-handler';
 import { handleUserRegistration } from '../handlers/user-registration-handler';
+import { handleUserRoleAdd } from '../handlers/user-role-add-handler';
+import { handleUserRoleRemove } from '../handlers/user-role-remove-handler';
+import { handleUserRolesFetch } from '../handlers/user-roles-fetch-handler';
 import { Actions, Events } from '../modules/events';
 
 const tag = (message: string) => {
@@ -13,19 +16,21 @@ const tag = (message: string) => {
 
 export interface IAction {
     type: string,
-    data?: Record<string, string>,
+    data?: Record<string, any>,
 }
 
 export interface IState {
     token: string,
     username: string,
     email: string,
+    roles: string[],
 }
 
 export const initialState: IState = {
     token: '',
     username: '',
     email: '',
+    roles: [],
 }
 
 export const reducer = (state: IState, action: IAction): IState => {
@@ -35,29 +40,17 @@ export const reducer = (state: IState, action: IAction): IState => {
 
     switch (action.type) {
         case Events.Reducer.APP_LOADED:
-            if (action.data) {
-                return {
-                    ...state,
-                    token: action.data.token,
-                }
-            } else {
-                return {
-                    ...state,
-                }
+            return {
+                ...state,
+                token: action.data?.token || '',
             }
 
         case Events.Reducer.USER_LOGGED_IN:
-            if (action.data) {
-                return {
-                    ...state,
-                    token: action.data.token,
-                    username: action.data.username,
-                    email: action.data.email,
-                }
-            } else {
-                return {
-                    ...state,
-                }
+            return {
+                ...state,
+                token: action.data?.token || '',
+                username: action.data?.username || '',
+                email: action.data?.email || '',
             }
 
         case Events.Reducer.USER_LOGGED_OUT:
@@ -67,29 +60,31 @@ export const reducer = (state: IState, action: IAction): IState => {
             };
 
         case Events.Reducer.USER_REGISTERED:
-            if (action.data) {
-                return {
-                    ...state,
-                    username: action.data.username,
-                    email: action.data.email,
-                }
-            } else {
-                return {
-                    ...state,
-                }
+            return {
+                ...state,
+                username: action.data?.username,
+                email: action.data?.email,
             }
 
         case Events.Reducer.USER_DETAILS_FETCHED:
-            if (action.data) {
-                return {
-                    ...state,
-                    username: action.data.username,
-                    email: action.data.email,
-                }
-            } else {
-                return {
-                    ...state,
-                }
+            return {
+                ...state,
+                username: action.data?.username || '',
+                email: action.data?.email || '',
+            }
+
+        case Events.Reducer.USER_ROLES_FETCHED:
+            return {
+                ...state,
+                roles: action.data?.roles || [],
+            }
+
+        case Events.Reducer.USER_ROLE_ADDED:
+            return {
+                ...state,
+                roles: action.data?.role && state.roles.indexOf(action.data.role) === -1
+                    ? [...state.roles, action.data.role]
+                    : [...state.roles]
             }
 
         default:
@@ -124,8 +119,20 @@ export const wrapDispatch = (dispatch: Dispatch<IAction>) => {
                 handleUserDetailsFetch(dispatch, action.data);
                 break;
 
+            case Actions.Reducer.FETCH_USER_ROLES:
+                handleUserRolesFetch(dispatch, action.data);
+                break;
+
+            case Actions.Reducer.ADD_USER_ROLE:
+                handleUserRoleAdd(dispatch, action.data);
+                break;
+
+            case Actions.Reducer.REMOVE_USER_ROLE:
+                handleUserRoleRemove(dispatch, action.data);
+                break;
+
             default:
-                console.debug(tag('no action matched - ' + action.type));
+                console.debug(tag('no actions matched - ' + action.type));
                 dispatch(action);
                 break;
         }

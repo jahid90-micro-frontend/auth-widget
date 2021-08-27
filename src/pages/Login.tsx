@@ -20,11 +20,12 @@ interface ILoginProps {
 }
 
 const Login = (props: ILoginProps) => {
+    const dispatch = useDispatchContext();
+    const history = useHistory();
+
     const [error, setError] = useState({} as ApiError);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const dispatch = useDispatchContext();
-    const history = useHistory();
 
     const handleSubmit = async (e: FormEvent<HTMLElement>) => {
         e.preventDefault();
@@ -72,6 +73,7 @@ const Login = (props: ILoginProps) => {
                         onChange={(e) => setUsername(e.target.value)}
                         autoFocus
                         className='form-field'
+                        autoComplete='username'
                     />
                 </Form.Field>
                 <Form.Field className='form-field-container'>
@@ -81,6 +83,7 @@ const Login = (props: ILoginProps) => {
                         type='password'
                         onChange={(e) => setPassword(e.target.value)}
                         className='form-field'
+                        autoComplete='current-password'
                     />
                 </Form.Field>
                 <Button type='submit' className='form-field' color='blue'>

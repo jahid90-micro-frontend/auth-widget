@@ -101,6 +101,8 @@ html, body {
     font-size: 16px;
 }
 
-.app .deposits-container .deposit-header {
-    font-size: 14px;
+.app .permission--list--item {
+    display: block;
+    margin: 10px 0;
+    padding-left: 10px;
 }

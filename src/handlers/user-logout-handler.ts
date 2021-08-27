@@ -10,25 +10,29 @@ const tag = (message: string) => {
 
 export const handleUserLogout = (dispatch: React.Dispatch<IAction>, data: (Record<string, string> | undefined)) => {
 
-    console.debug(tag('hanlding user logout'));
+    console.debug(tag('handling user logout'));
 
     (async () => {
         try {
 
             if (!data || !data.token) {
                 console.warn(tag('data or token is undefined'));
+                EventBus.emit(Events.Bus.LOGOUT_FAILED, {
+                    message: 'Logout failed',
+                    data: ['no active session was found']
+                });
                 return;
             }
 
             const token = data.token;
             await logout(token);
-            await clear();
+            clear();
 
             dispatch({ type: Events.Reducer.USER_LOGGED_OUT });
             EventBus.emit(Events.Bus.LOGOUT_SUCCEEDED);
 
         } catch (err) {
-            EventBus.emit(Events.Bus.LOGOUT_FAILED, err);
+            EventBus.emit(Events.Bus.LOGOUT_FAILED, { message: err.messsage, data: err.data || [] });
         }
     })();
 }

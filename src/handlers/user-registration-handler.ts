@@ -17,8 +17,8 @@ export const handleUserRegistration = (dispatch: React.Dispatch<IAction>, data: 
             if (!data || !data.username || !data.email || !data.password || !data.confirmPassword) {
                 console.warn(tag('incomplete data received'));
                 EventBus.emit(Events.Bus.REGISTRATION_FAILED, {
-                    message: 'Registration Failed',
-                    data: ['Please fill in all the fields']
+                    message: 'Registration failed',
+                    data: ['please fill in all the fields']
                 });
                 return;
             }
@@ -27,7 +27,7 @@ export const handleUserRegistration = (dispatch: React.Dispatch<IAction>, data: 
 
             if (password !== confirmPassword) {
                 EventBus.emit(Events.Bus.REGISTRATION_FAILED, {
-                    message: 'Registration Failed',
+                    message: 'Registration failed',
                     data: ['passwords do not match']
                 });
                 return;
@@ -39,7 +39,7 @@ export const handleUserRegistration = (dispatch: React.Dispatch<IAction>, data: 
             EventBus.emit(Events.Bus.REGISTRATION_SUCCEEDED);
 
         } catch (err) {
-            EventBus.emit(Events.Bus.REGISTRATION_FAILED, err);
+            EventBus.emit(Events.Bus.REGISTRATION_FAILED, { message: err.message, data: err.data || [] });
         }
     })();
 }
