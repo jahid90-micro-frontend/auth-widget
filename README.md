@@ -7,7 +7,7 @@ A react based app to manage user auth.
 ### Clone the repository
 
 ```sh
-$ git clone git://...
+$ git clone git@github.com:jahid90-micro-frontend/auth-widget.git
 ```
 
 ### Build
