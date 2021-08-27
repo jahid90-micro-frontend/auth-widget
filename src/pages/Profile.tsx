@@ -90,10 +90,6 @@ const Profile = () => {
     const onUserRoleAddSuccess = () => {
         console.debug(tag('user role add succeeded'));
         resetError();
-
-        // the role was successfully added; lets update the list of current permissions
-        // we could simulate it on the client side to save an api call
-        // dispatch({ type: Actions.Reducer.FETCH_USER_ROLES, data: { token } });
     }
 
     const onUserRoleAddFailure = (err: ApiError) => {
@@ -104,10 +100,6 @@ const Profile = () => {
     const onUserRoleRemoveSuccess = () => {
         console.debug(tag('user role remove succeeded'));
         resetError();
-
-        // the role was successfully removed; lets update the list of current permissions
-        // we could simulate it on the client side to save an api call
-        dispatch({ type: Actions.Reducer.FETCH_USER_ROLES, data: { token } });
     }
 
     const onUserRoleRemoveFailure = (err: ApiError) => {
@@ -190,7 +182,7 @@ const Profile = () => {
             <Segment tertiary>
                 <p>Here's your account details</p>
 
-                <Table inverted columns={2}>
+                <Table inverted columns={2} celled>
                     <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell width={5}>Name</Table.HeaderCell>

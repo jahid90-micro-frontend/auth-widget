@@ -186,7 +186,7 @@ export const addRole = async (token: string, role: string): Promise<void> => {
 
     try {
 
-        const response = await auth.post('/users/me/roles', {
+        const response = await auth.post('/users/me/roles/add', {
             role
         }, {
             headers: {

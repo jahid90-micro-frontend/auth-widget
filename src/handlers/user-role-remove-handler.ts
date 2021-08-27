@@ -18,14 +18,22 @@ export const handleUserRoleRemove = (dispatch: React.Dispatch<IAction>, payload:
                 console.warn(tag('token is missing'));
                 EventBus.emit(Events.Bus.USER_ROLE_REMOVE_FAILED, {
                     message: 'Role removal failed',
-                    data: ['no active session was found']
+                    data: ['no active session was found'],
                 });
                 return;
             }
 
+            if (!payload.role) {
+                console.debug(tag('role is missing'));
+                EventBus.emit(Events.Bus.USER_ROLE_REMOVE_FAILED, {
+                    message: 'Role removal failed',
+                    data: ['no role was provided'],
+                });
+            }
+
             await removeRole(payload.token, payload.role);
 
-            dispatch({ type: Events.Reducer.USER_ROLE_REMOVED });
+            dispatch({ type: Events.Reducer.USER_ROLE_REMOVED, data: { role: payload.role } });
             EventBus.emit(Events.Bus.USER_ROLE_REMOVE_SUCCEEDED);
 
         } catch (err) {
