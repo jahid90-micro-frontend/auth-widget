@@ -24,7 +24,6 @@ const Permissions = ({ setError, resetError }: IPermissionsProps) => {
     const dispatch = useDispatchContext();
     const { token, roles } = useAppContext();
 
-    const [error, updateError] = useState({} as ApiError);
     const [permissions, setPermissions] = useState([] as IPermission[]);
     const availablePermissions = [
         'users:list',
