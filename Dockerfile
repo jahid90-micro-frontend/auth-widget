@@ -1,4 +1,4 @@
-FROM node:16-alpine as builder
+FROM registry.jahiduls.mint/node:16-alpine as builder
 
 ARG PUBLIC_URL
 

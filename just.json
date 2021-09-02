@@ -5,7 +5,7 @@
         "lint": "pnpm lint",
         "test": "pnpm test",
         "start": "pnpm start",
-        "docker:build": "docker build -t auth:local .",
+        "docker:build": "docker build -t auth:dev -f Dockerfile.dev .",
         "docker:start": "docker-compose up -d",
         "docker:stop": "docker-compose down"
     }
