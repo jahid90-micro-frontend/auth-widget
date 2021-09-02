@@ -8,6 +8,7 @@ import { handleUserRegistration } from '../handlers/user-registration-handler';
 import { handleUserRoleAdd } from '../handlers/user-role-add-handler';
 import { handleUserRoleRemove } from '../handlers/user-role-remove-handler';
 import { handleUserRolesFetch } from '../handlers/user-roles-fetch-handler';
+import { handleUsersFetchAll } from '../handlers/users-fetch-all-handler';
 import { Actions, Events } from '../modules/events';
 
 const tag = (message: string) => {
@@ -19,11 +20,17 @@ export interface IAction {
     data?: Record<string, any>,
 }
 
+export interface IUser {
+    username: string,
+    email: string,
+}
+
 export interface IState {
     token: string,
     username: string,
     email: string,
     roles: string[],
+    users: IUser[],
 }
 
 export const initialState: IState = {
@@ -31,6 +38,7 @@ export const initialState: IState = {
     username: '',
     email: '',
     roles: [],
+    users: [],
 }
 
 export const reducer = (state: IState, action: IAction): IState => {
@@ -93,7 +101,14 @@ export const reducer = (state: IState, action: IAction): IState => {
                 roles: (action.data?.role && state.roles.filter(r => r !== action.data?.role)) || [...state.roles]
             }
 
+        case Events.Reducer.USERS_FETCH_ALL:
+            return {
+                ...state,
+                users: action.data?.users || [],
+            }
+
         default:
+            console.debug(tag(`received unidentified event: ${action.type}`));
             return {
                 ...state,
             };
@@ -135,6 +150,10 @@ export const wrapDispatch = (dispatch: Dispatch<IAction>) => {
 
             case Actions.Reducer.REMOVE_USER_ROLE:
                 handleUserRoleRemove(dispatch, action.data);
+                break;
+
+            case Actions.Reducer.FETCH_ALL_USERS:
+                handleUsersFetchAll(dispatch, action.data);
                 break;
 
             default:
