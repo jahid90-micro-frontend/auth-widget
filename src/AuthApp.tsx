@@ -10,6 +10,7 @@ export class AuthApp extends HTMLElement {
     connectedCallback() {
 
         console.log('mf-auth connected');
+        this.attachShadow({ mode: 'open' });
         this.render();
 
     }
@@ -22,7 +23,17 @@ export class AuthApp extends HTMLElement {
 
     render() {
 
-        ReactDOM.render(<App />, this);
+        const template = document.querySelector('template#mf-auth-css');
+        if (template) {
+            const templateContent = document.importNode(template, true);
+            this.shadowRoot?.appendChild(templateContent);
+        }
+
+        const $appRoot = document.createElement('div');
+        $appRoot.id = 'auth-app-root';
+        this.shadowRoot?.appendChild($appRoot);
+
+        ReactDOM.render(<App />, $appRoot);
 
     }
 
