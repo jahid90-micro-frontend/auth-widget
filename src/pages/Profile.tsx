@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Button, Message, Segment, Table } from 'semantic-ui-react';
+import { Button, Icon, Message, Segment, Table } from 'semantic-ui-react';
 
 import { useAppContext, useDispatchContext } from '../context/AppContextProvider';
 import { Actions, Events } from '../modules/events';
 import { EventBus } from '../modules/event-bus';
 import { ApiError } from '../clients/auth';
 import Permissions from '../components/Permissions';
+import Users from '../components/Users';
 
 const tag = (message: string) => {
     return `:profile:component: ${message}`;
@@ -100,26 +101,22 @@ const Profile = () => {
                 </Message>
             )}
 
-            <p>Hi {username}! This is the profile page.</p>
+            <h1>Welcome {username}!</h1>
 
             <Segment tertiary>
-                <p>Here's your account details</p>
+                <h2>Here's your account details</h2>
 
-                <Table inverted columns={2} celled>
+                <Table columns={2} celled>
                     <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell width={5}>Name</Table.HeaderCell>
-                            {/* <Table.Body> */}
                             <Table.Cell>{username}</Table.Cell>
-                            {/* </Table.Body> */}
                         </Table.Row>
                     </Table.Header>
                     <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell width={5}>Email</Table.HeaderCell>
-                            {/* <Table.Body> */}
                             <Table.Cell>{email}</Table.Cell>
-                            {/* </Table.Body> */}
                         </Table.Row>
                     </Table.Header>
                 </Table>
@@ -127,8 +124,11 @@ const Profile = () => {
 
             <Permissions setError={setError} resetError={resetError} />
 
+            <Users setError={setError} resetError={resetError} />
+
             <div>
-                <Button basic color='red' onClick={handleLogout}>
+                <Button labeled icon labelPosition='right' color='red' onClick={handleLogout}>
+                    <Icon name='log out' />
                     Logout
                 </Button>
             </div>

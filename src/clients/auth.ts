@@ -223,3 +223,27 @@ export const removeRole = async (token: string, role: string): Promise<void> => 
     }
 
 }
+
+export const getAllUsers = async (token: string): Promise<Record<string, any>> => {
+
+    console.debug(tag('request: fetch all users'));
+
+    try {
+
+        const response = await auth.get('/users/all', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        console.debug(tag(`response: ${JSON.stringify(response.data) || {}}`));
+
+        return {
+            users: response.data,
+        }
+
+    } catch (error) {
+        throw wrapError(error);
+    }
+
+}

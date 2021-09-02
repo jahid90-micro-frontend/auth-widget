@@ -8,6 +8,7 @@ export const Events = {
         USER_ROLES_FETCHED: 'event:user:roles:fetch',
         USER_ROLE_ADDED: 'event:user:role:add',
         USER_ROLE_REMOVED: 'event:user:role:remove',
+        USERS_FETCH_ALL: 'event:users:fetch:all',
     },
     Bus: {
         LOGIN_SUCCEEDED: 'event:login:succeeded',
@@ -24,6 +25,8 @@ export const Events = {
         USER_ROLE_ADD_FAILED: 'event:user:role:add:failed',
         USER_ROLE_REMOVE_SUCCEEDED: 'event:user:role:remove:succeeded',
         USER_ROLE_REMOVE_FAILED: 'event:user:role:remove:failed',
+        USERS_FETCH_ALL_SUCCEEDED: 'event:users:fetch:all:succeeded',
+        USERS_FETCH_ALL_FAILED: 'event:users:fetch:all:failed',
     }
 };
 
@@ -35,7 +38,8 @@ export const Actions = {
         REGISTER_USER: 'action:user:register',
         FETCH_USER_DETAILS: 'action:user:details:fetch',
         FETCH_USER_ROLES: 'action:user:roles:fetch',
-        ADD_USER_ROLE: 'actions:user:role:add',
-        REMOVE_USER_ROLE: 'actions:user:role:remove',
+        ADD_USER_ROLE: 'action:user:role:add',
+        REMOVE_USER_ROLE: 'action:user:role:remove',
+        FETCH_ALL_USERS: 'action:users:fetch:all',
     }
 };

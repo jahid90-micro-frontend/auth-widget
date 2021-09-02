@@ -27,8 +27,11 @@ const Permissions = ({ setError, resetError }: IPermissionsProps) => {
     const [permissions, setPermissions] = useState([] as IPermission[]);
     const availablePermissions = [
         'users:list',
-        'users:get',
-        'users:delete'
+        'users:add',
+        'users:remove',
+        'users:roles:list',
+        'users:roles:add',
+        'users:roles:remove',
     ];
 
     const handlePermissionToggle = async (permission: IPermission) => {
@@ -111,7 +114,7 @@ const Permissions = ({ setError, resetError }: IPermissionsProps) => {
 
     return (
         <Segment tertiary >
-            <p>Manage permissons: </p>
+            <h2>Manage permissons: </h2>
 
             {
                 permissions.map((permission, idx) => (
