@@ -23,7 +23,21 @@ export class ApiError extends Error {
     }
 }
 
-const wrapError = (error: any) => {
+type Error = {
+    request: any,
+    response: {
+        status: number,
+        data: {
+            error: {
+                message: string,
+                data: string[]
+            }
+        }
+    },
+    message: string,
+}
+
+const wrapError = (error: Error) => {
 
     if (error.response) {
 
@@ -39,8 +53,8 @@ const wrapError = (error: any) => {
             return new ApiError(message, data);
         } else {
             // if no error object is set in the response; could happed for 404, for e.g.
-            const { status, data } = error.response;
-            return new ApiError(status, [data]);
+            const { status } = error.response;
+            return new ApiError(String(status), []);
         }
 
     } else if (error.request) {
@@ -63,7 +77,7 @@ export const register = async (username: string, email: string, password: string
         console.debug(tag(`response: ${JSON.stringify(response.data) || {}}`));
 
     } catch (error) {
-        throw wrapError(error);
+        throw wrapError(error as Error);
     }
 };
 
@@ -83,7 +97,7 @@ export const login = async (username: string, password: string): Promise<string>
         return response.data.accessToken;
 
     } catch (error) {
-        throw wrapError(error);
+        throw wrapError(error as Error);
     }
 };
 
@@ -103,12 +117,12 @@ export const logout = async (token: string): Promise<void> => {
 
     } catch (error) {
 
-        if (error.response.status === 401) {
+        if ((error as Error).response.status === 401) {
             console.debug(tag('token is expired, going ahead with logout'));
             return;
         }
 
-        throw wrapError(error);
+        throw wrapError(error as Error);
     }
 };
 
@@ -125,7 +139,7 @@ export const refresh = async (): Promise<string> => {
         return response.data.accessToken;
 
     } catch (error) {
-        throw wrapError(error);
+        throw wrapError(error as Error);
     }
 };
 
@@ -150,7 +164,7 @@ export const getDetails = async (token: string): Promise<Record<string, string>>
         }
 
     } catch (error) {
-        throw wrapError(error);
+        throw wrapError(error as Error);
     }
 
 }
@@ -175,7 +189,7 @@ export const getRoles = async (token: string): Promise<Record<string, string>> =
         }
 
     } catch (error) {
-        throw wrapError(error);
+        throw wrapError(error as Error);
     }
 
 }
@@ -197,7 +211,7 @@ export const addRole = async (token: string, role: string): Promise<void> => {
         console.debug(tag(`response: ${JSON.stringify(response.data) || {}}`));
 
     } catch (error) {
-        throw wrapError(error);
+        throw wrapError(error as Error);
     }
 
 }
@@ -219,7 +233,7 @@ export const removeRole = async (token: string, role: string): Promise<void> => 
         console.debug(tag(`response: ${JSON.stringify(response.data) || {}}`));
 
     } catch (error) {
-        throw wrapError(error);
+        throw wrapError(error as Error);
     }
 
 }
@@ -243,7 +257,7 @@ export const getAllUsers = async (token: string): Promise<Record<string, any>> =
         }
 
     } catch (error) {
-        throw wrapError(error);
+        throw wrapError(error as Error);
     }
 
 }
