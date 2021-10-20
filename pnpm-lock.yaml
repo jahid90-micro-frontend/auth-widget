@@ -8,7 +8,7 @@ specifiers:
   '@types/jest': 27.0.2
   '@types/node': 14.17.27
   '@types/react': 17.0.30
-  '@types/react-dom': 17.0.9
+  '@types/react-dom': 17.0.10
   '@types/react-router-dom': 5.3.1
   axios: 0.21.3
   eslint: 7.32.0
@@ -42,7 +42,7 @@ devDependencies:
   '@types/jest': 27.0.2
   '@types/node': 14.17.27
   '@types/react': 17.0.30
-  '@types/react-dom': 17.0.9
+  '@types/react-dom': 17.0.10
   '@types/react-router-dom': 5.3.1
   eslint: 7.32.0
   prettier: 2.4.1
@@ -2331,10 +2331,10 @@ packages:
     resolution: {integrity: sha512-1HcDas8SEj4z1Wc696tH56G8OlRaH/sqZOynNNB+HF0WOeXPaxTtbYzJY2oEfiUxjSKjhCKr+MvR7dCHcEelug==}
     dev: true
 
-  /@types/react-dom/17.0.9:
-    resolution: {integrity: sha512-wIvGxLfgpVDSAMH5utdL9Ngm5Owu0VsGmldro3ORLXV8CShrL8awVj06NuEXFQ5xyaYfdca7Sgbk/50Ri1GdPg==}
+  /@types/react-dom/17.0.10:
+    resolution: {integrity: sha512-8oz3NAUId2z/zQdFI09IMhQPNgIbiP8Lslhv39DIDamr846/0spjZK0vnrMak0iB8EKb9QFTTIdg2Wj2zH5a3g==}
     dependencies:
-      '@types/react': 17.0.19
+      '@types/react': 17.0.30
     dev: true
 
   /@types/react-router-dom/5.3.1:
@@ -2349,15 +2349,7 @@ packages:
     resolution: {integrity: sha512-z3UlMG/x91SFEVmmvykk9FLTliDvfdIUky4k2rCfXWQ0NKbrP8o9BTCaCTPuYsB8gDkUnUmkcA2vYlm2DR+HAA==}
     dependencies:
       '@types/history': 4.7.8
-      '@types/react': 17.0.27
-    dev: true
-
-  /@types/react/17.0.19:
-    resolution: {integrity: sha512-sX1HisdB1/ZESixMTGnMxH9TDe8Sk709734fEQZzCV/4lSu9kJCPbo2PbTRoZM+53Pp0P10hYVyReUueGwUi4A==}
-    dependencies:
-      '@types/prop-types': 15.7.3
-      '@types/scheduler': 0.16.1
-      csstype: 3.0.8
+      '@types/react': 17.0.30
     dev: true
 
   /@types/react/17.0.27:
