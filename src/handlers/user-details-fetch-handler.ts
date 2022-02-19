@@ -25,7 +25,7 @@ export const handleUserDetailsFetch = (dispatch: React.Dispatch<IAction>, payloa
             dispatch({ type: Events.Reducer.USER_DETAILS_FETCHED, data });
             EventBus.emit(Events.Bus.USER_DETAILS_FETCH_SUCCEEDED);
 
-        } catch (err) {
+        } catch (err: any) {
             EventBus.emit(Events.Bus.USER_DETAILS_FETCH_FAILED, { message: err.message, data: err.data || [] });
         }
     })();

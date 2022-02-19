@@ -31,7 +31,7 @@ export const handleUserLogout = (dispatch: React.Dispatch<IAction>, data: (Recor
             dispatch({ type: Events.Reducer.USER_LOGGED_OUT });
             EventBus.emit(Events.Bus.LOGOUT_SUCCEEDED);
 
-        } catch (err) {
+        } catch (err: any) {
             EventBus.emit(Events.Bus.LOGOUT_FAILED, { message: err.messsage, data: err.data || [] });
         }
     })();

@@ -36,7 +36,7 @@ export const handleUserRoleRemove = (dispatch: React.Dispatch<IAction>, payload:
             dispatch({ type: Events.Reducer.USER_ROLE_REMOVED, data: { role: payload.role } });
             EventBus.emit(Events.Bus.USER_ROLE_REMOVE_SUCCEEDED);
 
-        } catch (err) {
+        } catch (err: any) {
             EventBus.emit(Events.Bus.USER_ROLE_REMOVE_FAILED, { message: err.message, data: err.data || [] });
         }
     })();

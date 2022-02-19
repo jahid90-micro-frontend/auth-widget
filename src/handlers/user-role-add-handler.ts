@@ -28,7 +28,7 @@ export const handleUserRoleAdd = (dispatch: React.Dispatch<IAction>, payload: (R
             dispatch({ type: Events.Reducer.USER_ROLE_ADDED, data: { role: payload.role } });
             EventBus.emit(Events.Bus.USER_ROLE_ADD_SUCCEEDED);
 
-        } catch (err) {
+        } catch (err: any) {
             EventBus.emit(Events.Bus.USER_ROLE_ADD_FAILED, { message: err.message, data: err.data || [] });
         }
     })();

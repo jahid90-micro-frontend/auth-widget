@@ -40,7 +40,7 @@ export const handleUserLogin = (dispatch: React.Dispatch<IAction>, payload: (Rec
             dispatch({ type: Events.Reducer.USER_LOGGED_IN, data: { token } });
             EventBus.emit(Events.Bus.LOGIN_SUCCEEDED);
 
-        } catch (err) {
+        } catch (err: any) {
             EventBus.emit(Events.Bus.LOGIN_FAILED, { message: err.message, data: err.data || [] });
         }
     })();

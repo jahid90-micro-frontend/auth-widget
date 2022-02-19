@@ -101,7 +101,7 @@ export const logout = async (token: string): Promise<void> => {
 
         console.debug(tag(`response: ${JSON.stringify(response.data) || {}}`));
 
-    } catch (error) {
+    } catch (error: any) {
 
         if (error.response.status === 401) {
             console.debug(tag('token is expired, going ahead with logout'));
