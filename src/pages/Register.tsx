@@ -29,7 +29,7 @@ const Register = () => {
             dispatch({ type: Actions.Reducer.REGISTER_USER, data: { username, email, password, confirmPassword } });
             // show spinner while we wait; can be reset on success/failure
 
-        } catch (e) {
+        } catch (e: any) {
             console.error(e);
             setError(e.response?.data?.error);
         }

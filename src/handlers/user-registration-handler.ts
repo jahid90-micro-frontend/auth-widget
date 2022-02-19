@@ -38,7 +38,7 @@ export const handleUserRegistration = (dispatch: React.Dispatch<IAction>, data: 
             dispatch({ type: Events.Reducer.USER_REGISTERED, data: { username, email } });
             EventBus.emit(Events.Bus.REGISTRATION_SUCCEEDED);
 
-        } catch (err) {
+        } catch (err: any) {
             EventBus.emit(Events.Bus.REGISTRATION_FAILED, { message: err.message, data: err.data || [] });
         }
     })();

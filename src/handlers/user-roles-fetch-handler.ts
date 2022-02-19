@@ -28,7 +28,7 @@ export const handleUserRolesFetch = (dispatch: React.Dispatch<IAction>, payload:
             dispatch({ type: Events.Reducer.USER_ROLES_FETCHED, data: { roles } });
             EventBus.emit(Events.Bus.USER_ROLES_FETCH_SUCCEEDED);
 
-        } catch (err) {
+        } catch (err: any) {
             console.debug(err);
             EventBus.emit(Events.Bus.USER_ROLES_FETCH_FAILED, { message: err.message, data: err.data || [] });
         }
