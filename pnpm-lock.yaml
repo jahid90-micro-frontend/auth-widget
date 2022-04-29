@@ -8,7 +8,7 @@ specifiers:
   '@types/jest': 27.4.1
   '@types/node': 16.11.32
   '@types/react': 17.0.44
-  '@types/react-dom': 17.0.16
+  '@types/react-dom': 18.0.3
   '@types/react-router-dom': 5.3.3
   axios: 0.27.2
   eslint: 7.32.0
@@ -42,7 +42,7 @@ devDependencies:
   '@types/jest': 27.4.1
   '@types/node': 16.11.32
   '@types/react': 17.0.44
-  '@types/react-dom': 17.0.16
+  '@types/react-dom': 18.0.3
   '@types/react-router-dom': 5.3.3
   eslint: 7.32.0
   prettier: 2.6.2
@@ -2352,6 +2352,12 @@ packages:
 
   /@types/react-dom/17.0.16:
     resolution: {integrity: sha512-DWcXf8EbMrO/gWnQU7Z88Ws/p16qxGpPyjTKTpmBSFKeE+HveVubqGO1CVK7FrwlWD5MuOcvh8gtd0/XO38NdQ==}
+    dependencies:
+      '@types/react': 17.0.44
+    dev: true
+
+  /@types/react-dom/18.0.3:
+    resolution: {integrity: sha512-1RRW9kst+67gveJRYPxGmVy8eVJ05O43hg77G2j5m76/RFJtMbcfAs2viQ2UNsvvDg8F7OfQZx8qQcl6ymygaQ==}
     dependencies:
       '@types/react': 17.0.44
     dev: true
