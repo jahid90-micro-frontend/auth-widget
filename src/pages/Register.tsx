@@ -1,5 +1,5 @@
 import { FormEvent, useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Button, Form, Icon, Label, Message, Segment } from 'semantic-ui-react';
 
 import { useDispatchContext } from '../context/AppContextProvider';
@@ -9,11 +9,11 @@ import { EventBus } from '../modules/event-bus';
 
 const tag = (message: string) => {
     return `:register:component: ${message}`;
-}
+};
 
 const Register = () => {
     const dispatch = useDispatchContext();
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const [error, setError] = useState({} as ApiError);
     const [username, setUsername] = useState('');
@@ -28,7 +28,6 @@ const Register = () => {
 
             dispatch({ type: Actions.Reducer.REGISTER_USER, data: { username, email, password, confirmPassword } });
             // show spinner while we wait; can be reset on success/failure
-
         } catch (e: any) {
             console.error(e);
             setError(e.response?.data?.error);
@@ -36,7 +35,6 @@ const Register = () => {
     };
 
     const onRegistrationSuccess = () => {
-
         console.debug(tag('successfully registered'));
 
         setUsername('');
@@ -45,25 +43,24 @@ const Register = () => {
         setConfirmPassword('');
 
         // Registration is successful; let's log the user in
-        (async() => {
+        (async () => {
             dispatch({ type: Actions.Reducer.LOG_USER_IN, data: { username, password } });
         })();
-    }
+    };
 
     const onRegistrationFailure = (data: ApiError) => {
         console.debug(tag('registration failed'));
         setError(data);
-    }
+    };
 
     useEffect(() => {
-
         EventBus.on(Events.Bus.REGISTRATION_SUCCEEDED, onRegistrationSuccess);
         EventBus.on(Events.Bus.REGISTRATION_FAILED, onRegistrationFailure);
 
         return () => {
             EventBus.off(Events.Bus.REGISTRATION_SUCCEEDED, onRegistrationSuccess);
             EventBus.off(Events.Bus.REGISTRATION_FAILED, onRegistrationFailure);
-        }
+        };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -110,13 +107,13 @@ const Register = () => {
                         autoComplete='new-password'
                     />
                 </Form.Field>
-                <Button type='submit' className='form-field' color='blue' >
+                <Button type='submit' className='form-field' color='blue'>
                     Submit
                 </Button>
                 <Message>
                     <div>
                         Already registered?{' '}
-                        <Label basic color='blue' as='a' onClick={() => history.push('/login')}>
+                        <Label basic color='blue' as='a' onClick={() => navigate('/login')}>
                             Login
                         </Label>
                     </div>
@@ -125,7 +122,9 @@ const Register = () => {
                     <Message negative>
                         <Message.Header>{error.message}</Message.Header>
                         <Message.List>
-                            {error.data?.map(message => <Message.Item>{message}</Message.Item>)}
+                            {error.data?.map((message) => (
+                                <Message.Item>{message}</Message.Item>
+                            ))}
                         </Message.List>
                     </Message>
                 )}

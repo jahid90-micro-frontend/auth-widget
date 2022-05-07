@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Container, Dimmer, Loader } from 'semantic-ui-react';
 import { useDispatchContext } from '../context/AppContextProvider';
 import { Actions } from '../modules/events';
-import Routes from './Routes';
+import Routes from './AppRoutes';
 
 function AppContainer() {
     const [loading, setLoading] = useState(true);

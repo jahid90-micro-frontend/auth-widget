@@ -1,14 +1,19 @@
-import { Redirect, Route, RouteProps } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useAppContext } from '../context/AppContextProvider';
 
-const AuthenticatedRoute = (props: RouteProps) => {
+interface AuthProps {
+    children: JSX.Element;
+}
+
+const AuthenticatedRoute = (props: AuthProps) => {
     const { token } = useAppContext();
 
     if (!token) {
-        return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />;
+        // TODO - send current location so that login can redirect to intended page
+        return <Navigate to='/login' replace state={{ from: '/' }} />;
     }
 
-    return <Route {...props} />;
+    return props.children;
 };
 
 export default AuthenticatedRoute;

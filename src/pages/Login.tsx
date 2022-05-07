@@ -1,5 +1,5 @@
 import { FormEvent, useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Button, Form, Icon, Label, Message, Segment } from 'semantic-ui-react';
 
 import { useDispatchContext } from '../context/AppContextProvider';
@@ -9,19 +9,19 @@ import { Actions, Events } from '../modules/events';
 
 const tag = (message: string) => {
     return `:login:component: ${message}`;
-}
+};
 
 interface ILoginProps {
     location?: {
         state?: {
             from?: string;
-        }
-    }
+        };
+    };
 }
 
 const Login = (props: ILoginProps) => {
     const dispatch = useDispatchContext();
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const [error, setError] = useState({} as ApiError);
     const [username, setUsername] = useState('');
@@ -46,18 +46,17 @@ const Login = (props: ILoginProps) => {
         setUsername('');
         setPassword('');
 
-        history.push(props?.location?.state?.from || '/');
+        navigate(props?.location?.state?.from || '/');
     };
 
     useEffect(() => {
-
         EventBus.on(Events.Bus.LOGIN_SUCCEEDED, onLoginSuccess);
         EventBus.on(Events.Bus.LOGIN_FAILED, onLoginFailure);
 
         return () => {
             EventBus.off(Events.Bus.LOGIN_SUCCEEDED, onLoginSuccess);
             EventBus.off(Events.Bus.LOGIN_FAILED, onLoginFailure);
-        }
+        };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -92,7 +91,7 @@ const Login = (props: ILoginProps) => {
                 <Message>
                     <div>
                         Not registered?{' '}
-                        <Label basic color='blue' as='a' onClick={() => history.push('/register')}>
+                        <Label basic color='blue' as='a' onClick={() => navigate('/register')}>
                             Register
                         </Label>
                     </div>
@@ -101,7 +100,9 @@ const Login = (props: ILoginProps) => {
                     <Message negative>
                         <Message.Header>{error.message}</Message.Header>
                         <Message.List>
-                            {error.data?.map((message, idx) => <Message.Item key={idx}>{message}</Message.Item>)}
+                            {error.data?.map((message, idx) => (
+                                <Message.Item key={idx}>{message}</Message.Item>
+                            ))}
                         </Message.List>
                     </Message>
                 )}

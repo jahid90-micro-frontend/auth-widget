@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Button, Icon, Message, Segment, Table } from 'semantic-ui-react';
 
 import { useAppContext, useDispatchContext } from '../context/AppContextProvider';
@@ -11,12 +11,12 @@ import Users from '../components/Users';
 
 const tag = (message: string) => {
     return `:profile:component: ${message}`;
-}
+};
 
 const Profile = () => {
     const dispatch = useDispatchContext();
     const { token, username, email } = useAppContext();
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const [error, updateError] = useState({} as ApiError);
 
@@ -26,11 +26,11 @@ const Profile = () => {
             message: err.message,
             data: error.data ? [...error.data, ...err.data] : [...err.data],
         });
-    }
+    };
 
     const resetError = () => {
         updateError({} as ApiError);
-    }
+    };
 
     const handleLogout = async () => {
         dispatch({ type: Actions.Reducer.LOG_USER_OUT, data: { token } });
@@ -40,29 +40,27 @@ const Profile = () => {
         console.debug(tag('logout succeeded'));
         resetError();
 
-        history.push('/login');
-    }
+        navigate('/login');
+    };
 
     const onLogoutFailure = (err: ApiError) => {
         console.debug(tag('logout failed'));
         setError(err);
-
-    }
+    };
 
     const onUserDetailsFetchSuccess = () => {
         console.debug(tag('user details fetch succeeded'));
         resetError();
         // remove loading spinner
-    }
+    };
 
     const onUserDetailsFetchFailure = (err: ApiError) => {
         console.debug(tag('user details fetch failed'));
         setError(err);
         // remove spinner
-    }
+    };
 
     useEffect(() => {
-
         EventBus.on(Events.Bus.LOGOUT_SUCCEEDED, onLogoutSuccess);
         EventBus.on(Events.Bus.LOGOUT_FAILED, onLogoutFailure);
         EventBus.on(Events.Bus.USER_DETAILS_FETCH_SUCCEEDED, onUserDetailsFetchSuccess);
@@ -76,12 +74,11 @@ const Profile = () => {
             EventBus.off(Events.Bus.LOGOUT_FAILED, onLogoutFailure);
             EventBus.off(Events.Bus.USER_DETAILS_FETCH_SUCCEEDED, onUserDetailsFetchSuccess);
             EventBus.off(Events.Bus.USER_DETAILS_FETCH_FAILED, onUserDetailsFetchFailure);
-        }
+        };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     if (!username || !email) {
-
         // TODO: fetching (loading)
         return (
             <Segment secondary className='profile-container page-container'>
@@ -96,7 +93,9 @@ const Profile = () => {
                 <Message negative>
                     <Message.Header>{error.message}</Message.Header>
                     <Message.List>
-                        {error.data?.map((message, idx) => <Message.Item key={idx}>{message}</Message.Item>)}
+                        {error.data?.map((message, idx) => (
+                            <Message.Item key={idx}>{message}</Message.Item>
+                        ))}
                     </Message.List>
                 </Message>
             )}
