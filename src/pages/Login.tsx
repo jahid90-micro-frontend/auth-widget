@@ -1,6 +1,6 @@
 import { FormEvent, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Form, Icon, Label, Message, Segment } from 'semantic-ui-react';
+import { Button, Form, Icon, Label, Message } from 'semantic-ui-react';
 
 import { useDispatchContext } from '../context/AppContextProvider';
 import { ApiError } from '../clients/auth';
@@ -61,15 +61,17 @@ const Login = (props: ILoginProps) => {
     }, []);
 
     return (
-        <Segment secondary className='form-container page-container w600'>
-            <Form className='login-form form centered columnar' onSubmit={handleSubmit}>
+        // <Segment secondary className='form-container page-container w600'>
+        <div>
+            {/* <Form className='login-form form centered columnar' onSubmit={handleSubmit}> */}
+            <form className='login-form form centered columnar' onSubmit={handleSubmit}>
                 <h1>Login</h1>
                 <Icon name='user' className='profile-image' size='massive' />
                 <Form.Field className='form-field-container'>
                     <Form.Input
                         placeholder='Username'
                         value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        onChange={(e: any) => setUsername(e.target.value)}
                         autoFocus
                         className='form-field'
                         autoComplete='username'
@@ -80,7 +82,7 @@ const Login = (props: ILoginProps) => {
                         placeholder='Password'
                         value={password}
                         type='password'
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e: any) => setPassword(e.target.value)}
                         className='form-field'
                         autoComplete='current-password'
                     />
@@ -106,8 +108,10 @@ const Login = (props: ILoginProps) => {
                         </Message.List>
                     </Message>
                 )}
-            </Form>
-        </Segment>
+            </form>
+            {/* </Form> */}
+        </div>
+        // </Segment>
     );
 };
 

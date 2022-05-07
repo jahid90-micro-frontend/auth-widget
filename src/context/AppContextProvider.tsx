@@ -1,6 +1,10 @@
-import { createContext, Dispatch, PropsWithChildren, ReactNode, useContext, useMemo, useReducer } from 'react';
+import { createContext, Dispatch, useContext, useMemo, useReducer } from 'react';
 
 import { IAction, initialState, IState, reducer, wrapDispatch } from './app-reducer';
+
+interface ProviderProps {
+    children: JSX.Element;
+}
 
 const AppContext = createContext<IState | undefined>(undefined);
 const DispatchContext = createContext<Dispatch<IAction> | undefined>(undefined);
@@ -25,7 +29,7 @@ export const useDispatchContext = () => {
     return context;
 };
 
-const AppContextProvider = (props: PropsWithChildren<ReactNode>) => {
+const AppContextProvider = (props: ProviderProps) => {
     const [state, dispatch] = useReducer(reducer, initialState);
     const wrappedDispatch = useMemo(() => wrapDispatch(dispatch), []);
     const wrappedState = useMemo(() => state, [state]);

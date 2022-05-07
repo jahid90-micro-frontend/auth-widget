@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Icon, Message, Segment, Table } from 'semantic-ui-react';
+import { Button, Icon, Message, Table } from 'semantic-ui-react';
 
 import { useAppContext, useDispatchContext } from '../context/AppContextProvider';
 import { Actions, Events } from '../modules/events';
@@ -81,14 +81,17 @@ const Profile = () => {
     if (!username || !email) {
         // TODO: fetching (loading)
         return (
-            <Segment secondary className='profile-container page-container'>
+            // <Segment secondary className='profile-container page-container'>
+            <div>
                 <p>Fetching your profile.</p>
-            </Segment>
+            </div>
+            // </Segment>
         );
     }
 
     return (
-        <Segment secondary className='profile-container page-container'>
+        // <Segment secondary className='profile-container page-container'>
+        <div>
             {error?.message && (
                 <Message negative>
                     <Message.Header>{error.message}</Message.Header>
@@ -102,10 +105,12 @@ const Profile = () => {
 
             <h1>Welcome {username}!</h1>
 
-            <Segment tertiary>
+            {/* <Segment tertiary> */}
+            <div>
                 <h2>Here's your account details</h2>
 
-                <Table columns={2} celled>
+                {/* <Table columns={2} celled> */}
+                <table>
                     <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell width={5}>Name</Table.HeaderCell>
@@ -118,8 +123,10 @@ const Profile = () => {
                             <Table.Cell>{email}</Table.Cell>
                         </Table.Row>
                     </Table.Header>
-                </Table>
-            </Segment>
+                </table>
+                {/* </Table> */}
+            </div>
+            {/* </Segment> */}
 
             <Permissions setError={setError} resetError={resetError} />
 
@@ -131,7 +138,8 @@ const Profile = () => {
                     Logout
                 </Button>
             </div>
-        </Segment>
+        </div>
+        // </Segment>
     );
 };
 
