@@ -4,7 +4,7 @@ specifiers:
   '@craco/craco': 6.4.3
   '@testing-library/dom': 8.13.0
   '@testing-library/jest-dom': 5.16.4
-  '@testing-library/react': 13.1.1
+  '@testing-library/react': 13.2.0
   '@testing-library/user-event': 14.1.1
   '@types/jest': 27.5.0
   '@types/node': 16.11.33
@@ -40,7 +40,7 @@ devDependencies:
   '@craco/craco': 6.4.3_odjbe22jkp5u4c4seig6hjlavu
   '@testing-library/dom': 8.13.0
   '@testing-library/jest-dom': 5.16.4
-  '@testing-library/react': 13.1.1_ef5jwxihqo6n7gxfmzogljlgcm
+  '@testing-library/react': 13.2.0_ef5jwxihqo6n7gxfmzogljlgcm
   '@testing-library/user-event': 14.1.1_tlwynutqiyp5mns3woioasuxnq
   '@types/jest': 27.5.0
   '@types/node': 16.11.33
@@ -2173,8 +2173,8 @@ packages:
       redent: 3.0.0
     dev: true
 
-  /@testing-library/react/13.1.1_ef5jwxihqo6n7gxfmzogljlgcm:
-    resolution: {integrity: sha512-8mirlAa0OKaUvnqnZF6MdAh2tReYA2KtWVw1PKvaF5EcCZqgK5pl8iF+3uW90JdG5Ua2c2c2E2wtLdaug3dsVg==}
+  /@testing-library/react/13.2.0_ef5jwxihqo6n7gxfmzogljlgcm:
+    resolution: {integrity: sha512-Bprbz/SZVONCJy5f7hcihNCv313IJXdYiv0nSJklIs1SQCIHHNlnGNkosSXnGZTmesyGIcBGNppYhXcc11pb7g==}
     engines: {node: '>=12'}
     peerDependencies:
       react: ^18.0.0
