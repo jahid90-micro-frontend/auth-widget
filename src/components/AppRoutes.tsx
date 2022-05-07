@@ -17,7 +17,7 @@ const AppRoutes = () => {
             <Nav />
             <Suspense fallback='Loading...'>
                 <Routes>
-                    <Route path='/' element={Home} />
+                    <Route path='/' element={<Home />} />
                     <Route
                         path='/login'
                         element={
@@ -42,7 +42,7 @@ const AppRoutes = () => {
                             </AuthenticatedRoute>
                         }
                     />
-                    <Route element={PageNotFound} />
+                    <Route element={<PageNotFound />} />
                 </Routes>
             </Suspense>
         </Router>

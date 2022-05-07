@@ -1,6 +1,6 @@
 import { FormEvent, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Form, Icon, Label, Message, Segment } from 'semantic-ui-react';
+import { Button, Form, Icon, Label, Message } from 'semantic-ui-react';
 
 import { useDispatchContext } from '../context/AppContextProvider';
 import { ApiError } from '../clients/auth';
@@ -65,15 +65,17 @@ const Register = () => {
     }, []);
 
     return (
-        <Segment secondary className='form-container page-container w600'>
-            <Form className='login-form form centered columnar' onSubmit={handleSubmit}>
+        // <Segment secondary className='form-container page-container w600'>
+        <div>
+            {/* <Form className='login-form form centered columnar' onSubmit={handleSubmit}> */}
+            <form className='login-form form centered columnar' onSubmit={handleSubmit}>
                 <h1>Register</h1>
                 <Icon name='user' className='profile-image' size='massive' />
                 <Form.Field className='form-field-container'>
                     <Form.Input
                         placeholder='Username'
                         value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        onChange={(e: any) => setUsername(e.target.value)}
                         autoFocus
                         className='form-field'
                         autoComplete='username'
@@ -83,7 +85,7 @@ const Register = () => {
                     <Form.Input
                         placeholder='Email'
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(e: any) => setEmail(e.target.value)}
                         className='form-field'
                     />
                 </Form.Field>
@@ -92,7 +94,7 @@ const Register = () => {
                         placeholder='Password'
                         value={password}
                         type='password'
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e: any) => setPassword(e.target.value)}
                         className='form-field'
                         autoComplete='new-password'
                     />
@@ -102,7 +104,7 @@ const Register = () => {
                         placeholder='Confirm Password'
                         value={confirmPassword}
                         type='password'
-                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        onChange={(e: any) => setConfirmPassword(e.target.value)}
                         className='form-field'
                         autoComplete='new-password'
                     />
@@ -128,8 +130,10 @@ const Register = () => {
                         </Message.List>
                     </Message>
                 )}
-            </Form>
-        </Segment>
+            </form>
+            {/* </Form> */}
+        </div>
+        // </Segment>
     );
 };
 

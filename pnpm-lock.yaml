@@ -8,7 +8,7 @@ specifiers:
   '@testing-library/user-event': 14.1.1
   '@types/jest': 27.5.0
   '@types/node': 16.11.33
-  '@types/react': 17.0.45
+  '@types/react': 18.0.9
   '@types/react-dom': 18.0.3
   '@types/react-router-dom': 5.3.3
   axios: 0.27.2
@@ -44,7 +44,7 @@ devDependencies:
   '@testing-library/user-event': 14.1.1_tlwynutqiyp5mns3woioasuxnq
   '@types/jest': 27.5.0
   '@types/node': 16.11.33
-  '@types/react': 17.0.45
+  '@types/react': 18.0.9
   '@types/react-dom': 18.0.3
   '@types/react-router-dom': 5.3.3
   eslint: 7.32.0
@@ -1807,7 +1807,7 @@ packages:
       collect-v8-coverage: 1.0.1
       exit: 0.1.2
       glob: 7.1.7
-      graceful-fs: 4.2.10
+      graceful-fs: 4.2.6
       istanbul-lib-coverage: 3.0.0
       istanbul-lib-instrument: 4.0.3
       istanbul-lib-report: 3.0.0
@@ -1833,7 +1833,7 @@ packages:
     engines: {node: '>= 10.14.2'}
     dependencies:
       callsites: 3.1.0
-      graceful-fs: 4.2.10
+      graceful-fs: 4.2.6
       source-map: 0.6.1
     dev: true
 
@@ -1852,7 +1852,7 @@ packages:
     engines: {node: '>= 10.14.2'}
     dependencies:
       '@jest/test-result': 26.6.2
-      graceful-fs: 4.2.10
+      graceful-fs: 4.2.6
       jest-haste-map: 26.6.2
       jest-runner: 26.6.3
       jest-runtime: 26.6.3
@@ -2348,14 +2348,14 @@ packages:
   /@types/react-dom/18.0.3:
     resolution: {integrity: sha512-1RRW9kst+67gveJRYPxGmVy8eVJ05O43hg77G2j5m76/RFJtMbcfAs2viQ2UNsvvDg8F7OfQZx8qQcl6ymygaQ==}
     dependencies:
-      '@types/react': 17.0.45
+      '@types/react': 18.0.9
     dev: true
 
   /@types/react-router-dom/5.3.3:
     resolution: {integrity: sha512-kpqnYK4wcdm5UaWI3fLcELopqLrHgLqNsdpHauzlQktfkHL3npOSwtj1Uz9oKBAzs7lFtVkV8j83voAz2D8fhw==}
     dependencies:
       '@types/history': 4.7.11
-      '@types/react': 17.0.45
+      '@types/react': 18.0.9
       '@types/react-router': 5.1.15
     dev: true
 
@@ -2363,11 +2363,11 @@ packages:
     resolution: {integrity: sha512-z3UlMG/x91SFEVmmvykk9FLTliDvfdIUky4k2rCfXWQ0NKbrP8o9BTCaCTPuYsB8gDkUnUmkcA2vYlm2DR+HAA==}
     dependencies:
       '@types/history': 4.7.11
-      '@types/react': 17.0.45
+      '@types/react': 18.0.9
     dev: true
 
-  /@types/react/17.0.45:
-    resolution: {integrity: sha512-YfhQ22Lah2e3CHPsb93tRwIGNiSwkuz1/blk4e6QrWS0jQzCSNbGLtOEYhPg02W0yGTTmpajp7dCTbBAMN3qsg==}
+  /@types/react/18.0.9:
+    resolution: {integrity: sha512-9bjbg1hJHUm4De19L1cHiW0Jvx3geel6Qczhjd0qY5VKVE2X5+x77YxAepuCwVh4vrgZJdgEJw48zrhRIeF4Nw==}
     dependencies:
       '@types/prop-types': 15.7.3
       '@types/scheduler': 0.16.1
@@ -3794,8 +3794,8 @@ packages:
       fsevents: 1.2.13
     dev: true
 
-  /chokidar/3.5.2:
-    resolution: {integrity: sha512-ekGhOnNVPgT77r4K/U3GDhu+FQ2S8TnK/s2KbIGXi0SZWuwkZ2QNyfWdZW+TVfn84DpEP7rLeCt2UI6bJ8GwbQ==}
+  /chokidar/3.5.3:
+    resolution: {integrity: sha512-Dr3sfKRP6oTcjf2JmUmFJfeVMvXBdegxB0iVQ5eb2V10uFJUCAS8OByZdVAyVb8xXNz3GjjTgj9kLWsZTqE6kw==}
     engines: {node: '>= 8.10.0'}
     requiresBuild: true
     dependencies:
@@ -5855,7 +5855,7 @@ packages:
     requiresBuild: true
     dependencies:
       bindings: 1.5.0
-      nan: 2.14.2
+      nan: 2.15.0
     dev: true
     optional: true
 
@@ -6949,7 +6949,7 @@ packages:
       chalk: 4.1.1
       deepmerge: 4.2.2
       glob: 7.1.7
-      graceful-fs: 4.2.10
+      graceful-fs: 4.2.6
       jest-environment-jsdom: 26.6.2
       jest-environment-node: 26.6.2
       jest-get-type: 26.3.0
@@ -7054,7 +7054,7 @@ packages:
       '@types/node': 16.11.33
       anymatch: 3.1.2
       fb-watchman: 2.0.1
-      graceful-fs: 4.2.10
+      graceful-fs: 4.2.6
       jest-regex-util: 26.0.0
       jest-serializer: 26.6.2
       jest-util: 26.6.2
@@ -7205,7 +7205,7 @@ packages:
     dependencies:
       '@jest/types': 26.6.2
       chalk: 4.1.1
-      graceful-fs: 4.2.10
+      graceful-fs: 4.2.6
       jest-pnp-resolver: 1.2.2_jest-resolve@26.6.2
       jest-util: 26.6.2
       read-pkg-up: 7.0.1
@@ -7290,7 +7290,7 @@ packages:
     engines: {node: '>= 10.14.2'}
     dependencies:
       '@types/node': 16.11.33
-      graceful-fs: 4.2.10
+      graceful-fs: 4.2.6
     dev: true
 
   /jest-snapshot/26.6.2:
@@ -7519,7 +7519,7 @@ packages:
     dependencies:
       universalify: 2.0.0
     optionalDependencies:
-      graceful-fs: 4.2.10
+      graceful-fs: 4.2.6
     dev: true
 
   /jsx-ast-utils/3.2.0:
@@ -8081,8 +8081,8 @@ packages:
       thunky: 1.1.0
     dev: true
 
-  /nan/2.14.2:
-    resolution: {integrity: sha512-M2ufzIiINKCuDfBSAUr1vWQ+vuVcA9kqx8JJUsbQi6yf1uGRyb7HfpdfUr5qLXf3B/t8dPvcjhKMmlfnP47EzQ==}
+  /nan/2.15.0:
+    resolution: {integrity: sha512-8ZtvEnA2c5aYCZYd1cvgdnU6cqwixRoYg70xPLWUws5ORTa/lnw+u4amixRS/Ac5U5mQVgp9pnlSUnbNWFaWZQ==}
     requiresBuild: true
     dev: true
     optional: true
@@ -11698,7 +11698,7 @@ packages:
       graceful-fs: 4.2.10
       neo-async: 2.6.2
     optionalDependencies:
-      chokidar: 3.5.2
+      chokidar: 3.5.3
       watchpack-chokidar2: 2.0.1
     dev: true
 

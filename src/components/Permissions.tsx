@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Checkbox, Segment } from 'semantic-ui-react';
+import { Checkbox } from 'semantic-ui-react';
 
 import { useAppContext, useDispatchContext } from '../context/AppContextProvider';
 import { Actions, Events } from '../modules/events';
@@ -8,16 +8,16 @@ import { ApiError } from '../clients/auth';
 
 const tag = (message: string) => {
     return `:permissions:component: ${message}`;
-}
+};
 
 interface IPermissionsProps {
-    setError: (err: ApiError) => void,
-    resetError: () => void,
+    setError: (err: ApiError) => void;
+    resetError: () => void;
 }
 
 interface IPermission {
-    role: string,
-    isChecked: boolean,
+    role: string;
+    isChecked: boolean;
 }
 
 const Permissions = ({ setError, resetError }: IPermissionsProps) => {
@@ -36,50 +36,51 @@ const Permissions = ({ setError, resetError }: IPermissionsProps) => {
 
     const handlePermissionToggle = async (permission: IPermission) => {
         // permission.isChecked has the previous state of the checkbox; so if it is false, role has been turned pn; so add
-        !permission.isChecked && dispatch({ type: Actions.Reducer.ADD_USER_ROLE, data: { token, role: permission.role } });
-        permission.isChecked && dispatch({ type: Actions.Reducer.REMOVE_USER_ROLE, data: { token, role: permission.role } });
-
-    }
+        !permission.isChecked &&
+            dispatch({ type: Actions.Reducer.ADD_USER_ROLE, data: { token, role: permission.role } });
+        permission.isChecked &&
+            dispatch({ type: Actions.Reducer.REMOVE_USER_ROLE, data: { token, role: permission.role } });
+    };
 
     const onUserRolesFetchSuccess = () => {
         console.debug(tag('user roles fetch succeeded'));
         resetError();
-    }
+    };
 
     const onUserRolesFetchFailure = (err: ApiError) => {
         console.debug(tag('user roles fetch failed'));
         setError(err);
-    }
+    };
 
     const onUserRoleAddSuccess = () => {
         console.debug(tag('user role add succeeded'));
         resetError();
-    }
+    };
 
     const onUserRoleAddFailure = (err: ApiError) => {
         console.debug(tag('user role add failed'));
         setError(err);
-    }
+    };
 
     const onUserRoleRemoveSuccess = () => {
         console.debug(tag('user role remove succeeded'));
         resetError();
-    }
+    };
 
     const onUserRoleRemoveFailure = (err: ApiError) => {
         console.debug(tag('user role remove failed'));
         console.debug(tag(JSON.stringify(err)));
         setError(err);
-    }
+    };
 
     useEffect(() => {
         console.debug(tag(`permissions before: ${JSON.stringify(permissions)}`));
-        const updatedPermissions: IPermission[] = availablePermissions.map((role => {
+        const updatedPermissions: IPermission[] = availablePermissions.map((role) => {
             return {
                 role,
                 isChecked: roles.indexOf(role) !== -1,
-            }
-        }));
+            };
+        });
 
         console.debug(tag(`permissions after: ${JSON.stringify(updatedPermissions)}`));
 
@@ -90,7 +91,6 @@ const Permissions = ({ setError, resetError }: IPermissionsProps) => {
     }, [roles]);
 
     useEffect(() => {
-
         EventBus.on(Events.Bus.USER_ROLES_FETCH_SUCCEEDED, onUserRolesFetchSuccess);
         EventBus.on(Events.Bus.USER_ROLES_FETCH_FAILED, onUserRolesFetchFailure);
         EventBus.on(Events.Bus.USER_ROLE_ADD_SUCCEEDED, onUserRoleAddSuccess);
@@ -108,26 +108,27 @@ const Permissions = ({ setError, resetError }: IPermissionsProps) => {
             EventBus.off(Events.Bus.USER_ROLE_ADD_FAILED, onUserRoleAddFailure);
             EventBus.off(Events.Bus.USER_ROLE_REMOVE_SUCCEEDED, onUserRoleRemoveSuccess);
             EventBus.off(Events.Bus.USER_ROLE_REMOVE_FAILED, onUserRoleRemoveFailure);
-        }
+        };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
-        <Segment tertiary >
+        // <Segment tertiary>
+        <div>
             <h2>Manage permissons: </h2>
 
-            {
-                permissions.map((permission, idx) => (
-                    <Checkbox
-                        toggle
-                        key = { idx }
-                        label = { permission.role }
-                        checked = { permission.isChecked }
-                        onChange = {() => handlePermissionToggle(permission)}
-                        className = 'permission--list--item'
-                    />
+            {permissions.map((permission, idx) => (
+                <Checkbox
+                    toggle
+                    key={idx}
+                    label={permission.role}
+                    checked={permission.isChecked}
+                    onChange={() => handlePermissionToggle(permission)}
+                    className='permission--list--item'
+                />
             ))}
-            </Segment>
+        </div>
+        // </Segment>
     );
 };
 
