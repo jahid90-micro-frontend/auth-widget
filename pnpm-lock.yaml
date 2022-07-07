@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@craco/craco': 6.4.4
+  '@craco/craco': 6.4.5
   '@testing-library/dom': 8.14.0
   '@testing-library/jest-dom': 5.16.4
   '@testing-library/react': 13.3.0
@@ -37,7 +37,7 @@ dependencies:
   semantic-ui-react: 2.1.3_biqbaboplfbrettd7655fr4n2y
 
 devDependencies:
-  '@craco/craco': 6.4.4_q3hd6ahbopnjcx2hemejs7ao5i
+  '@craco/craco': 6.4.5_q3hd6ahbopnjcx2hemejs7ao5i
   '@testing-library/dom': 8.14.0
   '@testing-library/jest-dom': 5.16.4
   '@testing-library/react': 13.3.0_biqbaboplfbrettd7655fr4n2y
@@ -1687,8 +1687,8 @@ packages:
       minimist: 1.2.5
     dev: true
 
-  /@craco/craco/6.4.4_q3hd6ahbopnjcx2hemejs7ao5i:
-    resolution: {integrity: sha512-KkgsN1wVQq+RsmZecm7MCQStNPwB1mrzaE6Z9v/NSJT92DAq7XPwxaEpo0ox83DZHSMvqVbk8jeTYNJdr57WzQ==}
+  /@craco/craco/6.4.5_q3hd6ahbopnjcx2hemejs7ao5i:
+    resolution: {integrity: sha512-8F2rIAao8sEh0FPP52ViEvDM9GjJ7acq0knu1c8UgI+EuZMD5/ZB270ol6jV4iNY7it9Umg/RoGBvNRUNr8U8w==}
     engines: {node: '>=6'}
     hasBin: true
     peerDependencies:
