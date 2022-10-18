@@ -6,7 +6,7 @@ specifiers:
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/react': 13.4.0
   '@testing-library/user-event': 14.4.3
-  '@types/jest': 29.1.2
+  '@types/jest': 29.2.0
   '@types/node': 16.11.66
   '@types/react': 18.0.21
   '@types/react-dom': 18.0.6
@@ -42,7 +42,7 @@ devDependencies:
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
   '@testing-library/user-event': 14.4.3_aaq3sbffpfe3jnxzm2zngsddei
-  '@types/jest': 29.1.2
+  '@types/jest': 29.2.0
   '@types/node': 16.11.66
   '@types/react': 18.0.21
   '@types/react-dom': 18.0.6
@@ -3302,8 +3302,8 @@ packages:
       '@types/istanbul-lib-report': 3.0.0
     dev: true
 
-  /@types/jest/29.1.2:
-    resolution: {integrity: sha512-y+nlX0h87U0R+wsGn6EBuoRWYyv3KFtwRNP3QWp9+k2tJ2/bqcGS3UxD7jgT+tiwJWWq3UsyV4Y+T6rsMT4XMg==}
+  /@types/jest/29.2.0:
+    resolution: {integrity: sha512-KO7bPV21d65PKwv3LLsD8Jn3E05pjNjRZvkm+YTacWhVmykAb07wW6IkZUmQAltwQafNcDUEUrMO2h3jeBSisg==}
     dependencies:
       expect: 29.0.1
       pretty-format: 29.0.1
@@ -3422,7 +3422,7 @@ packages:
   /@types/testing-library__jest-dom/5.14.0:
     resolution: {integrity: sha512-l2P2GO+hFF4Liye+fAajT1qBqvZOiL79YMpEvgGs1xTK7hECxBI8Wz4J7ntACJNiJ9r0vXQqYovroXRLPDja6A==}
     dependencies:
-      '@types/jest': 29.1.2
+      '@types/jest': 29.2.0
     dev: true
 
   /@types/trusted-types/2.0.2:
@@ -4248,7 +4248,7 @@ packages:
       '@types/babel__core': 7.1.14
       babel-plugin-istanbul: 6.1.1
       babel-preset-jest: 27.5.1_@babel+core@7.19.3
-      chalk: 4.1.1
+      chalk: 4.1.2
       graceful-fs: 4.2.10
       slash: 3.0.0
     transitivePeerDependencies:
@@ -8130,7 +8130,7 @@ packages:
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     dependencies:
       '@jest/types': 27.5.1
-      chalk: 4.1.1
+      chalk: 4.1.2
       graceful-fs: 4.2.10
       jest-haste-map: 27.5.1
       jest-pnp-resolver: 1.2.2_jest-resolve@27.5.1
@@ -8296,7 +8296,7 @@ packages:
       jest: ^27.0.0 || ^28.0.0
     dependencies:
       ansi-escapes: 4.3.2
-      chalk: 4.1.1
+      chalk: 4.1.2
       jest: 27.5.1
       jest-regex-util: 28.0.2
       jest-watcher: 28.1.3
