@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@craco/craco': 7.0.0
+  '@craco/craco': 7.1.0
   '@testing-library/dom': 8.20.0
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/react': 13.4.0
@@ -37,7 +37,7 @@ dependencies:
   semantic-ui-react: 2.1.4_biqbaboplfbrettd7655fr4n2y
 
 devDependencies:
-  '@craco/craco': 7.0.0_7mauo6tf5af3pexttc7pfbboji
+  '@craco/craco': 7.1.0_7mauo6tf5af3pexttc7pfbboji
   '@testing-library/dom': 8.20.0
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
@@ -2213,8 +2213,8 @@ packages:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
     dev: true
 
-  /@craco/craco/7.0.0_7mauo6tf5af3pexttc7pfbboji:
-    resolution: {integrity: sha512-OyjL9zpURB6Ha1HO62Hlt27Xd7UYJ8DRiBNuE4DBB8Ue0iQ9q/xsv3ze7ROm6gCZqV6I2Gxjnq0EHCCye+4xDQ==}
+  /@craco/craco/7.1.0_7mauo6tf5af3pexttc7pfbboji:
+    resolution: {integrity: sha512-oRAcPIKYrfPXp9rSzlsDNeOaVtDiKhoyqSXUoqiK24jCkHr4T8m/a2f74yXIzCbIheoUWDOIfWZyRgFgT+cpqA==}
     engines: {node: '>=6'}
     hasBin: true
     peerDependencies:
