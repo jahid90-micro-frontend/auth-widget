@@ -8,8 +8,8 @@ specifiers:
   '@testing-library/user-event': 14.4.3
   '@types/jest': 29.5.0
   '@types/node': 18.15.10
-  '@types/react': 18.0.30
-  '@types/react-dom': 18.0.11
+  '@types/react': 18.2.73
+  '@types/react-dom': 18.2.22
   '@types/react-router-dom': 5.3.3
   axios: 0.27.2
   eslint: 8.36.0
@@ -44,8 +44,8 @@ devDependencies:
   '@testing-library/user-event': 14.4.3_yxlyej73nftwmh2fiao7paxmlm
   '@types/jest': 29.5.0
   '@types/node': 18.15.10
-  '@types/react': 18.0.30
-  '@types/react-dom': 18.0.11
+  '@types/react': 18.2.73
+  '@types/react-dom': 18.2.22
   '@types/react-router-dom': 5.3.3
   eslint: 8.36.0
   prettier: 2.8.7
@@ -3142,7 +3142,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.19.4
       '@testing-library/dom': 9.0.1
-      '@types/react-dom': 18.0.11
+      '@types/react-dom': 18.2.22
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: true
@@ -3363,17 +3363,17 @@ packages:
     resolution: {integrity: sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==}
     dev: true
 
-  /@types/react-dom/18.0.11:
-    resolution: {integrity: sha512-O38bPbI2CWtgw/OoQoY+BRelw7uysmXbWvw3nLWO21H1HSh+GOlqPuXshJfjmpNlKiiSDG9cc1JZAaMmVdcTlw==}
+  /@types/react-dom/18.2.22:
+    resolution: {integrity: sha512-fHkBXPeNtfvri6gdsMYyW+dW7RXFo6Ad09nLFK0VQWR7yGLai/Cyvyj696gbwYvBnhGtevUG9cET0pmUbMtoPQ==}
     dependencies:
-      '@types/react': 18.0.30
+      '@types/react': 18.2.73
     dev: true
 
   /@types/react-router-dom/5.3.3:
     resolution: {integrity: sha512-kpqnYK4wcdm5UaWI3fLcELopqLrHgLqNsdpHauzlQktfkHL3npOSwtj1Uz9oKBAzs7lFtVkV8j83voAz2D8fhw==}
     dependencies:
       '@types/history': 4.7.11
-      '@types/react': 18.0.30
+      '@types/react': 18.2.73
       '@types/react-router': 5.1.15
     dev: true
 
@@ -3381,14 +3381,13 @@ packages:
     resolution: {integrity: sha512-z3UlMG/x91SFEVmmvykk9FLTliDvfdIUky4k2rCfXWQ0NKbrP8o9BTCaCTPuYsB8gDkUnUmkcA2vYlm2DR+HAA==}
     dependencies:
       '@types/history': 4.7.11
-      '@types/react': 18.0.30
+      '@types/react': 18.2.73
     dev: true
 
-  /@types/react/18.0.30:
-    resolution: {integrity: sha512-AnME2cHDH11Pxt/yYX6r0w448BfTwQOLEhQEjCdwB7QskEI7EKtxhGUsExTQe/MsY3D9D5rMtu62WRocw9A8FA==}
+  /@types/react/18.2.73:
+    resolution: {integrity: sha512-XcGdod0Jjv84HOC7N5ziY3x+qL0AfmubvKOZ9hJjJ2yd5EE+KYjWhdOjt387e9HPheHkdggF9atTifMRtyAaRA==}
     dependencies:
       '@types/prop-types': 15.7.3
-      '@types/scheduler': 0.16.1
       csstype: 3.0.8
     dev: true
 
@@ -3400,10 +3399,6 @@ packages:
 
   /@types/retry/0.12.0:
     resolution: {integrity: sha512-wWKOClTTiizcZhXnPY4wikVAwmdYHp8q6DmC+EJUzAMsycb7HB32Kh9RN4+0gExjmPmZSAQjgURXIGATPegAvA==}
-    dev: true
-
-  /@types/scheduler/0.16.1:
-    resolution: {integrity: sha512-EaCxbanVeyxDRTQBkdLb3Bvl/HK7PBK6UJjsSixB0iHKoWxE5uu2Q/DgtpOhPIojN0Zl1whvOd7PoHs2P0s5eA==}
     dev: true
 
   /@types/serve-index/1.9.1:
