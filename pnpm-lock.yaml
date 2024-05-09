@@ -22,7 +22,7 @@ specifiers:
   react-scripts: 5.0.1
   semantic-ui-css: 2.5.0
   semantic-ui-react: 2.1.4
-  style-loader: 3.3.2
+  style-loader: 3.3.4
   typescript: 4.9.5
   webpack: 5.76.3
 
@@ -50,7 +50,7 @@ devDependencies:
   eslint: 8.36.0
   prettier: 2.8.7
   react-scripts: 5.0.1_g4ssdyyxd6zhf5tqd24yazbeaq
-  style-loader: 3.3.2_webpack@5.76.3
+  style-loader: 3.3.4_webpack@5.76.3
   typescript: 4.9.5
   webpack: 5.76.3
 
@@ -9381,7 +9381,7 @@ packages:
       sass-loader: 12.6.0_webpack@5.76.3
       semver: 7.3.5
       source-map-loader: 3.0.1_webpack@5.76.3
-      style-loader: 3.3.2_webpack@5.76.3
+      style-loader: 3.3.4_webpack@5.76.3
       tailwindcss: 3.1.8
       terser-webpack-plugin: 5.3.6_webpack@5.76.3
       typescript: 4.9.5
@@ -10239,8 +10239,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /style-loader/3.3.2_webpack@5.76.3:
-    resolution: {integrity: sha512-RHs/vcrKdQK8wZliteNK4NKzxvLBzpuHMqYmUVWeKa6MkaIQ97ZTOS0b+zapZhy6GcrgWnvWYCMHRirC3FsUmw==}
+  /style-loader/3.3.4_webpack@5.76.3:
+    resolution: {integrity: sha512-0WqXzrsMTyb8yjZJHDqwmnwRJvhALK9LfRtRc6B4UTWe8AijYLZYZ9thuJTZc2VfQWINADW/j+LiJnfy2RoC1w==}
     engines: {node: '>= 12.13.0'}
     peerDependencies:
       webpack: ^5.0.0
